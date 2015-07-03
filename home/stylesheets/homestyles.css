@@ -1,0 +1,385 @@
+						/* tag styles */
+
+a:link {
+	color: #999999;
+	text-decoration: none;
+	font-family: 'Roboto Slab', serif;
+	-webkit-transition-property: width, height; /* Safari */
+	-webkit-transition-duration: 0.6s; /* Safari */
+	transition-property: width, height;
+	transition-duration: .6s;
+	-webkit-transition: all 600ms ease;
+	-moz-transition: all 600ms ease;
+	-ms-transition: all 600ms ease;
+	-o-transition: all 600ms ease;
+	transition: all 600ms ease
+}
+a:visited {
+	color: #999999;
+}
+a:hover {
+	color: #cccccc;
+}
+a:active {
+	color: #000000;
+	text-decoration: none;
+}
+blockquote {
+	background: #cdcdcd;
+	border-left: 10px solid #ccc;
+	margin: 1.5em 10px;
+	padding: 0.5em 10px;
+	quotes: "\201C""\201D""\2018""\2019";
+	font-size: 9px;
+	color: #343434;
+}
+blockquote:before {
+	color: #000000;
+	content: open-quote;
+	font-size: 4em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	}
+blockquote p {
+	display: inline;
+}
+body {
+	font-family: 'Roboto Slab', serif;
+	font-size: 1.25em;
+	margin: 0 auto;
+	max-width: 800px;
+	background: #ffffff;
+	color: #000000;
+}
+div {
+	position: relative;
+	font-family: 'Roboto Slab', serif;
+}
+h1 {
+	font-family: 'Roboto Slab', serif;
+	text-align: center;
+	position: relative;
+	font-size: 4em;
+	color: #000000;
+	margin: 40px 0 0 0;
+}
+h2 {
+	font-family: 'Squada One', cursive;
+	font-size: 2em;
+	text-align: center;
+	color: #999999;
+	margin: 0px 0 40px 0;
+}
+h3 {
+	font-family: 'Roboto Slab', serif;
+	margin-top: 1.75em;
+}
+header{
+    height:100%
+}
+img {
+    margin: 0px auto;
+}
+p {
+    margin: 0 0 0 0;
+}
+
+					/* class styles */
+
+.blogheader{
+	width: 800px;
+	height: 160px;
+	background-size: cover;
+	margin: 40px 0 0 0;
+	background-size: cover;
+	border-radius: 12px;
+	color:#ffffff;
+	font-weight: 700;
+	-webkit-filter: brightness(100%);
+	-webkit-filter: grayscale(20%);
+}
+p.blogcaption{
+	color: #333333;
+	font-size: 9px;
+	background: white;
+  	opacity:.85
+	margin: -30px auto 30px;
+	text-align: center;
+	width: 100%;
+	padding: auto;
+
+}
+.caption {
+	color: #dddddd;
+	background: black;
+	background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+	background: -webkit-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+	background: -moz-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+	line-height: 28px;
+	text-align: justify;
+	position: absolute;
+	bottom: 0;
+	margin: 0;
+	padding: 10px 0 10px 10px;
+	height: 30px;
+	width: 790px;
+	transition: height .5s;
+	-webkit-transition: height .5s;
+	-moz-transition: height .5s;
+}
+p.content{
+	margin: 16px auto 16px;
+}
+img.content{
+	margin: 30px auto;
+	text-align: center;
+	width:100%;
+}
+img.content:hover{
+	-webkit-filter: brightness(100%);
+}
+img.hold{
+	width:auto;
+	border: 3px solid #111111;
+	margin: 30px auto;
+}
+.content-image{
+	text-align: center;
+}
+.feet {
+	font-family: 'Squada One', cursive;
+	text-align: center;
+	font-size: 50px;
+	color: #999999;
+	height: 2em
+}
+.main {
+	width: 800px;
+	height: 160px;
+	background-size: cover;
+	margin: 40px 0 0 0;
+	background-size: cover;
+	border-radius: 12px;
+	color:#ffffff;
+	font-size: 1em;
+	font-weight: 700;
+	transition-property: width, height;
+	transition-duration: .2s;
+	-webkit-transition-property: width, height; /* Safari */
+	-webkit-transition-duration: 0.2s; /* Safari */
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	-webkit-filter: brightness(100%);
+	-webkit-filter: grayscale(20%);
+
+}
+a.main {
+	color:#ffffff;
+	font-size: 0.85em;
+}
+.main-pending {
+	width: 800px;
+	height: 160px;
+	background-size: cover;
+	margin: 40px 0 0 0;
+	background-size: cover;
+	border-radius: 12px;
+	color:#ffffff;
+	font-weight: 700;
+	transition-property: width, height;
+	transition-duration: .2s;
+	-webkit-transition-property: width, height; /* Safari */
+	-webkit-transition-duration: 0.2s; /* Safari */
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	opacity:.85;
+	-webkit-filter: brightness(80%);
+	-webkit-filter: grayscale(100%);
+
+}
+.main:hover {
+	width: 800px;
+	height: 300px;
+	color:#ffffff;
+	border-radius: 18px;
+	opacity:1;
+	-webkit-filter: grayscale(0%);
+	-webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 1)), to(rgba(0, 0, 0, 0)))
+}
+.main-pending:hover {
+	color:#ffffff;
+	border-radius: 18px;
+	opacity:1;
+	-webkit-filter: grayscale(100%);
+	-webkit-filter: brightness(100%);
+	-webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 1)), to(rgba(0, 0, 0, 0)))
+}
+.wrapper {
+    min-height: 100%;
+    margin: 0 auto 20px;
+}
+.push {
+    height: 10px; /* .push must be the same height as .footer */
+}
+.entrynavleft {
+	width: 200px;
+	height: 100px;
+	margin: auto 10px;
+}
+.entrynavmid {
+	width: 200px;
+	height: 100px;
+	margin: auto 10px auto;
+}
+.entrynavlright {
+	width: 200px;
+	height: 100px;
+	margin: auto 10px auto;
+}
+
+
+					/* id styles */
+
+#about{
+	-webkit-transition-property: width, height; /* Safari */
+	-webkit-transition-duration: 0.2s; /* Safari */
+	transition-property: width, height;
+	transition-duration: .2s;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	-webkit-filter: brightness(115%);
+}  
+#about:hover{
+
+}
+#home{
+	-webkit-transition-property: width, height; /* Safari */
+	-webkit-transition-duration: 0.2s; /* Safari */
+	transition-property: width, height;
+	transition-duration: .2s;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	-webkit-filter: brightness(115%);
+}
+#home:hover{
+
+	opacity:.75;
+	-webkit-filter: grayscale(50%);
+}
+#zri{
+	background-image: url("https://lh6.googleusercontent.com/-uNDT_Uoh7Dg/VCtAtyIRlgI/AAAAAAAADmc/o9HOgAGwXdg/s875-no/IMG_20140930_182224.jpg");
+	background-position:center;
+}
+#nlp{
+	background-image: url("https://lh5.googleusercontent.com/-1WRQC8fpkHA/U5oRwxBxslI/AAAAAAAABCo/0Hl7iBrRjPI/w1556-h875-no/20140612_154431.jpg");
+	background-position:center;
+}
+#nlp2{
+	background-image: url("https://lh5.googleusercontent.com/-iqs0Onxc3UE/U5oNWUOZewI/AAAAAAAAB60/ytxFMUo4BDw/w1556-h875-no/20140612_152610.jpg");
+	background-position:center;
+}
+#colorcode{
+	background-image: url("https://lh3.googleusercontent.com/-tji8VQl9LJ0/VAFj1o916pI/AAAAAAAACps/_AaIUZilBuI/s875-no/IMG_20140829_214910.jpg");
+	background-position:center;
+}
+#avatar{
+	background-image: url("http://i.imgur.com/60wnSDf.jpg");
+	background-position:center;
+}
+#electricity{
+	background-image: url("https://lh5.googleusercontent.com/-D195QTtFjME/U_zpMAoiOsI/AAAAAAAACj4/KSZSWW8SRXU/s875-no/IMG_20140826_152651.jpg");
+	background-position:center;
+}
+#gasoline{
+	background-image: url("http://bit.ly/1yqxr2B");
+	background-position: center;
+}
+#hapcap{
+	background-image: url("https://lh3.googleusercontent.com/-E9ZUGcTEUJ4/U5oUWIt0OyI/AAAAAAAABDw/hk_0tx2MdTI/w492-h875-no/20140612_155104.jpg");
+	background-position: center;
+}
+#nbaprimetime{
+	background-image: url("http://isportsweb.com/wp-content/uploads//2014/08/NBA-logo.jpg");
+	background-position: top;
+}
+#020115{
+	background-image: url("http://www.halflife2.net/news_images/201103/1299105779_Portal-2-screenshots-081.jpg");
+	background-position: top;
+}
+@media (max-width: 720px) {
+h1 {
+	font-family: 'Roboto Slab', serif;
+	color:#000000;
+	font-size: 2em;
+	margin-top: 20px;
+	line-height: 40px;
+	padding: 0 30px 0 30px;
+}
+h2 {
+	font-family: 'Squada One', cursive;
+	margin: 20px 0 30px 0;
+	padding: 0 30px 0 30px;
+}
+h3 {
+	font-family: 'Roboto Slab', serif;
+	margin-top: 1.75em;
+}
+div {
+	margin: 20px;
+}
+p {
+	font-size: 20px;
+	line-height: 24px;
+	padding: auto;
+}
+.blogcaption{
+	font-size: 12px;
+}
+}
+
+@media (max-width: 320px) {
+hr{
+	length: 290px;
+}
+
+h1 {
+	font-family: 'Roboto Slab', serif;
+	color:#000000;
+	font-size: 2em;
+	margin-top: 20px;
+	line-height: 40px;
+}
+h2 {
+	font-family: 'Squada One', cursive;
+	margin: 20px 0 30px 0;
+}
+h3 {
+	font-family: 'Roboto Slab', serif;
+	margin-top: 1.75em;
+}
+div {
+	margin: 20px;
+}
+p {
+	font-size: 14px;
+	line-height: 24px;
+	margin: 20px;
+	padding: auto;
+}
+.blogcaption{
+	font-size: 12px;
+}
+}
