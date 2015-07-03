@@ -136,6 +136,29 @@ a small {
   margin:0 auto;
 }
 
+.main {
+	width: 800px;
+	height: 160px;
+	background-size: cover;
+	margin: 40px 0 0 0;
+	background-size: cover;
+	border-radius: 12px;
+	color:#ffffff;
+	font-size: 1em;
+	font-weight: 700;
+	transition-property: width, height;
+	transition-duration: .2s;
+	-webkit-transition-property: width, height; /* Safari */
+	-webkit-transition-duration: 0.2s; /* Safari */
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	-webkit-filter: brightness(100%);
+	-webkit-filter: grayscale(20%);
+}
+
 blockquote {
   border-left:1px solid #e5e5e5;
   margin:0;
