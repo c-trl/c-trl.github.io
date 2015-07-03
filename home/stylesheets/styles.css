@@ -7,6 +7,11 @@ body {
   font-weight:300;
 }
 
+header {
+    height:100%;
+    position:relative;
+}
+    
 h1, h2, h3, h4, h5, h6 {
   color:#222;
   margin:0 0 20px;
@@ -123,12 +128,9 @@ a small {
 	max-width: 800px;
 	background: #ffffff;
 	color: #000000;
+    position: relative;
 }
 
-.header {
-    height:100%;
-}
-    
 .wrapper {
   width:860px;
   margin:0 auto;
