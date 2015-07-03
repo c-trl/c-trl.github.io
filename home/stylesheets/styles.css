@@ -116,6 +116,15 @@ a small {
 	background-position: top;
 }
 
+.container (
+    font-family: 'Roboto Slab', serif;
+	font-size: 1.25em;
+	margin: 0 auto;
+	max-width: 800px;
+	background: #ffffff;
+	color: #000000;
+}
+
 .wrapper {
   width:860px;
   margin:0 auto;
