@@ -95,6 +95,10 @@ img {
   max-width:100%;
 }
 
+img.home{
+    border:10px solid #000000;
+}
+
 header {
   width:270px;
   float:left;
