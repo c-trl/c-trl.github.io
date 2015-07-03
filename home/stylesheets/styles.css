@@ -116,7 +116,7 @@ a small {
 	background-position: top;
 }
 
-.container (
+.container {
     font-family: 'Roboto Slab', serif;
 	font-size: 1.25em;
 	margin: 0 auto;
@@ -125,6 +125,10 @@ a small {
 	color: #000000;
 }
 
+.header {
+    height:100%;
+}
+    
 .wrapper {
   width:860px;
   margin:0 auto;
