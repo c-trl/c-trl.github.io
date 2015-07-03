@@ -7,11 +7,6 @@ body {
   font-weight:300;
 }
 
-header {
-    height:100%;
-    position:relative;
-}
-    
 h1, h2, h3, h4, h5, h6 {
   color:#222;
   margin:0 0 20px;
@@ -122,13 +117,18 @@ a small {
 }
 
 .container {
-    font-family: 'Roboto Slab', serif;
 	font-size: 1.25em;
 	margin: 0 auto;
-	max-width: 800px;
+	max-width: 600px;
 	background: #ffffff;
 	color: #000000;
     position: relative;
+}
+
+.homeheader {
+    height:100%;
+    position:relative;
+    margin: 0 auto
 }
 
 .wrapper {
@@ -157,6 +157,25 @@ a small {
 	transition: all 200ms ease;
 	-webkit-filter: brightness(100%);
 	-webkit-filter: grayscale(20%);
+}
+
+.caption {
+	color: #dddddd;
+	background: black;
+	background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+	background: -webkit-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+	background: -moz-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+	line-height: 28px;
+	text-align: justify;
+	position: absolute;
+	bottom: 0;
+	margin: 0;
+	padding: 10px 0 10px 10px;
+	height: 30px;
+	width: 790px;
+	transition: height .5s;
+	-webkit-transition: height .5s;
+	-moz-transition: height .5s;
 }
 
 blockquote {
