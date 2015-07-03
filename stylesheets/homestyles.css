@@ -279,43 +279,55 @@ a.main {
 	opacity:.75;
 	-webkit-filter: grayscale(50%);
 }
-#zillow{
+
+#headlines{
 	background-image: url("https://lh6.googleusercontent.com/-uNDT_Uoh7Dg/VCtAtyIRlgI/AAAAAAAADmc/o9HOgAGwXdg/s875-no/IMG_20140930_182224.jpg");
-	background-position:center;
-}
-#xanga{
-	background-image: url("https://lh5.googleusercontent.com/-1WRQC8fpkHA/U5oRwxBxslI/AAAAAAAABCo/0Hl7iBrRjPI/w1556-h875-no/20140612_154431.jpg");
-	background-position:center;
-}
-#pacquiao{
-	background-image: url("https://lh5.googleusercontent.com/-iqs0Onxc3UE/U5oNWUOZewI/AAAAAAAAB60/ytxFMUo4BDw/w1556-h875-no/20140612_152610.jpg");
-	background-position:center;
-}
-#colorcode{
-	background-image: url("https://lh3.googleusercontent.com/-tji8VQl9LJ0/VAFj1o916pI/AAAAAAAACps/_AaIUZilBuI/s875-no/IMG_20140829_214910.jpg");
-	background-position:center;
-}
-#avatar{
-	background-image: url("http://i.imgur.com/60wnSDf.jpg");
 	background-position:center;
 }
 #energy{
 	background-image: url("https://lh5.googleusercontent.com/-D195QTtFjME/U_zpMAoiOsI/AAAAAAAACj4/KSZSWW8SRXU/s875-no/IMG_20140826_152651.jpg");
 	background-position:center;
 }
-#jerseycity{
-    background-image: url("http://i.imgur.com/Z2Bw92X.jpg");
+#pacquiao{
+	background-image: url("https://lh5.googleusercontent.com/-iqs0Onxc3UE/U5oNWUOZewI/AAAAAAAAB60/ytxFMUo4BDw/w1556-h875-no/20140612_152610.jpg");
+	background-position:center;
+}
+
+#insta{
+    background-image: url("http://i.imgur.com/W5tkYS2.jpg");
     background-position:center;
 }
+#zillow{
+	background-image: url("https://lh6.googleusercontent.com/-uNDT_Uoh7Dg/VCtAtyIRlgI/AAAAAAAADmc/o9HOgAGwXdg/s875-no/IMG_20140930_182224.jpg");
+	background-position:center;
+}
+
+#avatar{
+	background-image: url("http://i.imgur.com/60wnSDf.jpg");
+	background-position:center;
+}
+#xanga{
+	background-image: url("https://lh5.googleusercontent.com/-1WRQC8fpkHA/U5oRwxBxslI/AAAAAAAABCo/0Hl7iBrRjPI/w1556-h875-no/20140612_154431.jpg");
+	background-position:center;
+}
+
 #fred{
 	background-image: url("https://lh3.googleusercontent.com/-E9ZUGcTEUJ4/U5oUWIt0OyI/AAAAAAAABDw/hk_0tx2MdTI/w492-h875-no/20140612_155104.jpg");
 	background-position: center;
 }
-#nbaprimetime{
+#MAXSCHICKEN{
+	background-image: url("https://lh3.googleusercontent.com/-tji8VQl9LJ0/VAFj1o916pI/AAAAAAAACps/_AaIUZilBuI/s875-no/IMG_20140829_214910.jpg");
+	background-position:center;
+}
+#JCHUDSON{
+    background-image: url("http://i.imgur.com/Z2Bw92X.jpg");
+    background-position:center;
+}
+#NBALOGO{
 	background-image: url("http://isportsweb.com/wp-content/uploads//2014/08/NBA-logo.jpg");
 	background-position: top;
 }
-#020115{
+#020115PORTAL{
 	background-image: url("http://www.halflife2.net/news_images/201103/1299105779_Portal-2-screenshots-081.jpg");
 	background-position: top;
 }
