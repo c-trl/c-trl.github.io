@@ -95,6 +95,11 @@ img {
   max-width:100%;
 }
 
+img.feet {
+  width:256px;
+  height:256px;
+}
+
 header {
   width:270px;
   float:left;
