@@ -63,7 +63,6 @@ code, pre {
   font-size:12px;
 }
 
-
 table {
   width:100%;
   border-collapse:collapse;
@@ -104,20 +103,6 @@ img.home {
 img.body{
     border: 1px solid #e5e5e5;
     background: #e5e5e5;
-}
-
-div.hilite {
-    background: #272822; 
-    overflow:auto;
-    width:auto;
-    border:solid gray;
-    border-width:.1em .1em .1em .8em;
-    padding:.2em .6em;
-}
-
-pre.hilite {
-     margin: 0;
-     line-height: 125%;
 }
 
 header {
