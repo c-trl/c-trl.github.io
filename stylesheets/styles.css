@@ -103,6 +103,7 @@ img.feet {
 img.home {
     border: 1px solid #777;
     border-radius: 100px;
+    background: #777;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
 }
