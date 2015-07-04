@@ -108,6 +108,11 @@ img.home {
     -moz-border-radius: 100px;
 }
 
+img.body{
+    border: 1px solid #e5e5e5;
+    background: #e5e5e5;
+}
+
 header {
   width:270px;
   float:left;
