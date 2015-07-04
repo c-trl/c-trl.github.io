@@ -33,7 +33,49 @@
         <h3>
 <a id="eia" class="anchor" href="#eia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction to the EIA Website and API</h3>
 
-<p>The U.S. Energy Information Administration has a <a class="reference" href="http://http://www.eia.gov/">great website</a> and is a go-to resource for anything energy data-related.  The site has gone through a number of design changes, and provides a great GUI tool to explore various datasets, however to really dig into historical data, it's easier to bring data in remotely.  Luckily, EIA has developed an API to allow for easy access to historical data.</p>
+<p>The <a href="http://www.eia.gov/" class="reference">U.S. Energy Information Administration</a> and is a great resource for anything energy data-related.  The site's most recent design updates provide GUI tools to explore various datasets.  However to really dig into and gather historical data en masse, it's easier to pull datasets in remotely.  Luckily, EIA has developed an API to allow for easy access to their data.  Full documentation for their API can be found <a href="http://www.eia.gov/beta/api/commands.cfm" class="reference">here</a></p>
+
+<p>The two API calls that are used for this project in particular query EIA's datasets for keywords, and request data corresponding to specific data series IDs.</p>
+
+<!-- HTML generated using hilite.me --><div class="hilite" style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #f8f8f2">searches</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{}</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">search_keywords</span><span style="color: #f8f8f2">():</span>
+    <span style="color: #f8f8f2">query</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">raw_input(</span><span style="color: #e6db74">&#39;Search for Keyword: &#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">query</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;x&#39;</span> <span style="color: #f92672">or</span> <span style="color: #f8f8f2">query</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;q&#39;</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #66d9ef">pass</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">base_url</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;http://api.eia.gov/search/?search_term=name&amp;search_value=&quot;{}&quot;&amp;rows_per_page={}&#39;</span>
+        <span style="color: #f8f8f2">r</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">requests</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(base_url</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">format(query,</span> <span style="color: #e6db74">&#39;10000&#39;</span><span style="color: #f8f8f2">))</span>
+        <span style="color: #f8f8f2">text</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">r</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">text</span>
+        <span style="color: #f8f8f2">master_dict</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">json</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">loads(text)</span>
+        <span style="color: #f8f8f2">m</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">master_dict</span>
+        <span style="color: #f8f8f2">data</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">m[</span><span style="color: #e6db74">&#39;response&#39;</span><span style="color: #f8f8f2">]</span>
+        <span style="color: #f8f8f2">docs</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">data[</span><span style="color: #e6db74">&#39;docs&#39;</span><span style="color: #f8f8f2">]</span>
+        <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;Search Results Found:&#39;</span><span style="color: #f8f8f2">)</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">series</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">docs:</span>
+            <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">{series[</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f8f8f2">]:series[</span><span style="color: #e6db74">&#39;series_id&#39;</span><span style="color: #f8f8f2">]}</span>
+</pre></td></tr></table></div>
+
+
+
+
+<p>To access the EIA API, first <a href="http://www.eia.gov/beta/api/register.cfm" class="reference">complete registration to receive an API key.  The key will be used every time a request for data is made.
 
 <h3>
 <a class="blog-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting Up</h3>

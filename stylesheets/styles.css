@@ -113,6 +113,12 @@ img.body{
     background: #e5e5e5;
 }
 
+div.hilite {
+    border:solid gray;
+    border-width:.1em .1em .1em .8em;
+    padding:.2em .6em;
+}
+
 header {
   width:270px;
   float:left;
