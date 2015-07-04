@@ -113,10 +113,18 @@ img.body{
     background: #e5e5e5;
 }
 
-hilite {
+div.hilite {
+    background: #272822; 
+    overflow:auto;
+    width:auto;
     border:solid gray;
     border-width:.1em .1em .1em .8em;
     padding:.2em .6em;
+}
+
+pre.hilite {
+     margin: 0;
+     line-height: 125%;
 }
 
 header {

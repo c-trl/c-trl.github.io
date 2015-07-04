@@ -38,26 +38,24 @@
 <p>The two API calls that are used for this project in particular query EIA's datasets for keywords, and request data corresponding to specific data series IDs.</p>
 
 
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">searches <span style="color: #666666">=</span> {}
+<!-- HTML generated using hilite.me --><div class="hilite"><pre class="hilite"><span style="color: #f8f8f2">searches</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{}</span>
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">search_keywords</span>():
-    query <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Search for Keyword: &#39;</span>)
-    <span style="color: #008000; font-weight: bold">if</span> query <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;x&#39;</span> <span style="color: #AA22FF; font-weight: bold">or</span> query <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;q&#39;</span>:
-        <span style="color: #008000; font-weight: bold">pass</span>
-    <span style="color: #008000; font-weight: bold">else</span>:
-        base_url <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;http://api.eia.gov/search/?search_term=name&amp;search_value=&quot;{}&quot;&amp;rows_per_page={}&#39;</span>
-        r <span style="color: #666666">=</span> requests<span style="color: #666666">.</span>get(base_url<span style="color: #666666">.</span>format(query, <span style="color: #BA2121">&#39;10000&#39;</span>))
-        text <span style="color: #666666">=</span> r<span style="color: #666666">.</span>text
-        master_dict <span style="color: #666666">=</span> json<span style="color: #666666">.</span>loads(text)
-        m <span style="color: #666666">=</span> master_dict
-        data <span style="color: #666666">=</span> m[<span style="color: #BA2121">&#39;response&#39;</span>]
-        docs <span style="color: #666666">=</span> data[<span style="color: #BA2121">&#39;docs&#39;</span>]
-        <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Search Results Found:&#39;</span>)
-        <span style="color: #008000; font-weight: bold">for</span> series <span style="color: #AA22FF; font-weight: bold">in</span> docs:
-            <span style="color: #008000; font-weight: bold">print</span> {series[<span style="color: #BA2121">&#39;name&#39;</span>]:series[<span style="color: #BA2121">&#39;series_id&#39;</span>]}
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">search_keywords</span><span style="color: #f8f8f2">():</span>
+    <span style="color: #f8f8f2">query</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">raw_input(</span><span style="color: #e6db74">&#39;Search for Keyword: &#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">query</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;x&#39;</span> <span style="color: #f92672">or</span> <span style="color: #f8f8f2">query</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;q&#39;</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #66d9ef">pass</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">base_url</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;http://api.eia.gov/search/?search_term=name&amp;search_value=&quot;{}&quot;&amp;rows_per_page={}&#39;</span>
+        <span style="color: #f8f8f2">r</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">requests</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(base_url</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">format(query,</span> <span style="color: #e6db74">&#39;10000&#39;</span><span style="color: #f8f8f2">))</span>
+        <span style="color: #f8f8f2">text</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">r</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">text</span>
+        <span style="color: #f8f8f2">master_dict</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">json</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">loads(text)</span>
+        <span style="color: #f8f8f2">m</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">master_dict</span>
+        <span style="color: #f8f8f2">data</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">m[</span><span style="color: #e6db74">&#39;response&#39;</span><span style="color: #f8f8f2">]</span>
+        <span style="color: #f8f8f2">docs</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">data[</span><span style="color: #e6db74">&#39;docs&#39;</span><span style="color: #f8f8f2">]</span>
+        <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;Search Results Found:&#39;</span><span style="color: #f8f8f2">)</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">series</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">docs:</span>
+            <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">{series[</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f8f8f2">]:series[</span><span style="color: #e6db74">&#39;series_id&#39;</span><span style="color: #f8f8f2">]}</span>
 </pre></div>
-
-
 
 
 <p>To access the EIA API, first <a href="http://www.eia.gov/beta/api/register.cfm" class="reference">complete registration to receive an API key.  The key will be used every time a request for data is made.
