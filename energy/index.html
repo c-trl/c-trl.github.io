@@ -36,24 +36,7 @@
 <p>The <a href="http://www.eia.gov/" class="reference">U.S. Energy Information Administration</a> and is a great resource for anything energy data-related.  The site's most recent design updates provide GUI tools to explore various datasets.  However to really dig into and gather historical data en masse, it's easier to pull datasets in remotely.  Luckily, EIA has developed an API to allow for easy access to their data.  Full documentation for their API can be found <a href="http://www.eia.gov/beta/api/commands.cfm" class="reference">here</a></p>
 
 <p>The two API calls that are used for this project in particular query EIA's datasets for keywords, and request data corresponding to specific data series IDs.</p>
-
-<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #f8f8f2">searches</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{}</span>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f8f8f2">searches</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{}</span>
 
 <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">search_keywords</span><span style="color: #f8f8f2">():</span>
     <span style="color: #f8f8f2">query</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">raw_input(</span><span style="color: #e6db74">&#39;Search for Keyword: &#39;</span><span style="color: #f8f8f2">)</span>
@@ -70,7 +53,8 @@
         <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;Search Results Found:&#39;</span><span style="color: #f8f8f2">)</span>
         <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">series</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">docs:</span>
             <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">{series[</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f8f8f2">]:series[</span><span style="color: #e6db74">&#39;series_id&#39;</span><span style="color: #f8f8f2">]}</span>
-</pre></td></tr></table></div>
+</pre></div>
+
 
 
 
