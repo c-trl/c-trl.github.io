@@ -131,6 +131,15 @@ p.blogcaption{
 p.content{
 	margin: 16px auto 16px;
 }
+
+img.home {
+    border: 1px solid #777;
+    border-radius: 100px;
+    background: #777;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+}
+
 img.content{
 	margin: 30px auto;
 	text-align: center;
