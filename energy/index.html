@@ -37,40 +37,15 @@
 
 <p>The two API calls that are used for this project in particular query EIA's datasets for keywords, and request data corresponding to specific data series IDs.</p>
 
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17</pre></td><td><pre style="margin: 0; line-height: 125%">searches <span style="color: #666666">=</span> {}
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">search_keywords</span>():
-    query <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Search for Keyword: &#39;</span>)
-    <span style="color: #008000; font-weight: bold">if</span> query <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;x&#39;</span> <span style="color: #AA22FF; font-weight: bold">or</span> query <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;q&#39;</span>:
-        <span style="color: #008000; font-weight: bold">pass</span>
-    <span style="color: #008000; font-weight: bold">else</span>:
-        base_url <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;http://api.eia.gov/search/?search_term=name&amp;search_value=&quot;{}&quot;&amp;rows_per_page={}&#39;</span>
-        r <span style="color: #666666">=</span> requests<span style="color: #666666">.</span>get(base_url<span style="color: #666666">.</span>format(query, <span style="color: #BA2121">&#39;10000&#39;</span>))
-        text <span style="color: #666666">=</span> r<span style="color: #666666">.</span>text
-        master_dict <span style="color: #666666">=</span> json<span style="color: #666666">.</span>loads(text)
-        m <span style="color: #666666">=</span> master_dict
-        data <span style="color: #666666">=</span> m[<span style="color: #BA2121">&#39;response&#39;</span>]
-        docs <span style="color: #666666">=</span> data[<span style="color: #BA2121">&#39;docs&#39;</span>]
-        <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Search Results Found:&#39;</span>)
-        <span style="color: #008000; font-weight: bold">for</span> series <span style="color: #AA22FF; font-weight: bold">in</span> docs:
-            <span style="color: #008000; font-weight: bold">print</span> {series[<span style="color: #BA2121">&#39;name&#39;</span>]:series[<span style="color: #BA2121">&#39;series_id&#39;</span>]}
-</pre></td></tr></table></div>
+<!-- import libs -->
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">pandas.io.json</span> <span style="color: #008000; font-weight: bold">import</span> json_normalize
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">requests</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">json</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">bs4</span> <span style="color: #008000; font-weight: bold">import</span> BeautifulSoup <span style="color: #008000; font-weight: bold">as</span> bs
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">datetime</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pickle</span>
+</pre></div>
 
 
 
