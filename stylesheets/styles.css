@@ -100,6 +100,13 @@ img.feet {
   height:256px;
 }
 
+img.home {
+    border: 10px solid black;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+}
+
 header {
   width:270px;
   float:left;
