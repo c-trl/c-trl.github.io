@@ -43,6 +43,14 @@ a small {
   color:#777;
   margin-top:-0.6em;
   display:block;
+
+}
+
+a.twitter-timeline {
+    width: 300;
+    height: 300;
+    data-chrome: nofooter noborders;
+    data-tweet-limit: none;
 }
 
 .wrapper {
