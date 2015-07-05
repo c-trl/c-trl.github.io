@@ -118,7 +118,74 @@ Search Results Found:
     search_series(query, save_as)
 </pre></div>
 
+<br>
 
+<!-- helper functions -->
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">#helper functions</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">query_url</span>(url):
+    r <span style="color: #666666">=</span> requests<span style="color: #666666">.</span>get(url)
+    text <span style="color: #666666">=</span> r<span style="color: #666666">.</span>text
+    j <span style="color: #666666">=</span> json<span style="color: #666666">.</span>loads(text)
+    <span style="color: #008000; font-weight: bold">return</span> j
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">nav_json</span>(j):
+    data <span style="color: #666666">=</span> j[<span style="color: #BA2121">&#39;series&#39;</span>]
+    data <span style="color: #666666">=</span> data[<span style="color: #666666">0</span>]
+    data <span style="color: #666666">=</span> data[<span style="color: #BA2121">&#39;data&#39;</span>]
+    <span style="color: #008000; font-weight: bold">return</span> data
+</pre></div>
+
+<br>
+
+<!-- define compile_data() -->
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compile_state_data</span>(series):
+    series_df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame() <span style="color: #408080; font-style: italic">#df for each series</span>
+    <span style="color: #008000; font-weight: bold">try</span>:
+        <span style="color: #008000; font-weight: bold">for</span> state_data <span style="color: #AA22FF; font-weight: bold">in</span> [x <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> df_i[series][series]]:
+            url <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;http://api.eia.gov/series/?series_id={}&amp;api_key={}&amp;out=json&#39;</span><span style="color: #666666">.</span>format(state_data,api_key)
+            j <span style="color: #666666">=</span> query_url(url)
+            data <span style="color: #666666">=</span> nav_json(j)
+            df_inst <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame(data) <span style="color: #408080; font-style: italic">#contains year, series data</span>
+            df_inst<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;Year&#39;</span>, series]
+            df_inst[<span style="color: #BA2121">&#39;Year&#39;</span>] <span style="color: #666666">=</span> [datetime<span style="color: #666666">.</span>datetime<span style="color: #666666">.</span>strptime(<span style="color: #008000">str</span>(x), <span style="color: #BA2121">&#39;%Y&#39;</span>)<span style="color: #666666">.</span>year <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> df_inst[<span style="color: #BA2121">&#39;Year&#39;</span>]]
+            df_inst[<span style="color: #BA2121">&#39;State&#39;</span>] <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span><span style="color: #666666">.</span>join(df_i[series][<span style="color: #BA2121">&#39;State&#39;</span>][df_i[series][series] <span style="color: #666666">==</span> state_data])
+            df_inst <span style="color: #666666">=</span> df_inst[[<span style="color: #BA2121">&#39;State&#39;</span>, <span style="color: #BA2121">&#39;Year&#39;</span>, series]]
+            <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(series_df) <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+                series_df <span style="color: #666666">=</span> df_inst
+            <span style="color: #008000; font-weight: bold">else</span>:
+                <span style="color: #408080; font-style: italic">#series_df = pd.merge(series_df, df_inst, on=[&#39;State&#39;,&#39;Year&#39;], how=&#39;inner&#39;)</span>
+                series_df <span style="color: #666666">=</span> series_df<span style="color: #666666">.</span>append(df_inst, ignore_index<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+        <span style="color: #008000; font-weight: bold">return</span> series_df
+    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">Exception</span>, e:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Error: &#39;</span>, <span style="color: #008000">str</span>(e), <span style="color: #BA2121">&#39;is not a recognized EIA Series ID.&#39;</span>
+</pre></div>
+
+<br>
+
+<!-- run compile_data() -->
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">Total_Energy <span style="color: #666666">=</span> compile_state_data(<span style="color: #BA2121">&#39;Total Energy Production&#39;</span>)
+Renewable_Energy <span style="color: #666666">=</span> compile_state_data(<span style="color: #BA2121">&#39;Renewable Production&#39;</span>)
+Res_Electricity_Price <span style="color: #666666">=</span> compile_state_data(<span style="color: #BA2121">&#39;Price of Residential Electricity&#39;</span>)
+</pre></div>
+
+<br>
+
+<!-- df creation -->
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">keys <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;State&#39;</span>, <span style="color: #BA2121">&#39;Year&#39;</span>]
+df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>merge(Total_Energy, Renewable_Energy, on<span style="color: #666666">=</span>keys)<span style="color: #666666">.</span>merge(Res_Electricity_Price, on<span style="color: #666666">=</span>keys)
+df[<span style="color: #BA2121">&#39;Renewable, Percentage of Production&#39;</span>] <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;Renewable Production&#39;</span>]<span style="color: #666666">/</span>df[<span style="color: #BA2121">&#39;Total Energy Production&#39;</span>]
+</pre></div>
+
+<br>
+
+<!-- pickling -->
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">outFile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;df.txt&#39;</span>, <span style="color: #BA2121">&#39;wb&#39;</span>)
+pickle<span style="color: #666666">.</span>dump(df, outFile)
+outFile<span style="color: #666666">.</span>close()
+</pre></div>
+
+<br>
 
       </section>
       <footer>
