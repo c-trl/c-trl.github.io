@@ -15,14 +15,14 @@
     <![endif]-->
   </head>
   <body>
-    <div class="wrapper">
+    <div class="wrapper">  
       <header>
       
       
         <center><h1><a href="/home"><img src="http://i.imgur.com/9673XO4.png" class="home" height=120px width=120px></a></h1></center>
         <hr>
         <h3><a id="eia" class="anchor" href="#eia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working with the EIA.gov API</h3>
-        <p><a href="/energy">Section I: Getting to Know the API, Configuration and Setup</a></p>
+        <p><a href="/energy">Section I: Introduction, Configuration and Setup</a></p>
         <p><a href="/energy/p2">Section II: Aggregating EIA Data with Python</a></p>
         <p><a href="/energy/p3">Section III: Cleaning, Visualization with Pandas, Matplotlib</a></p>
         <p><a href="/energy/p4">Section IV: Understanding SVG Files with BeautifulSoup</a></p>
@@ -33,11 +33,11 @@
         <h3>
 <a id="eia" class="anchor" href="#eia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction to the EIA Website and API</h3>
 
-<p>The <a href="http://www.eia.gov/" class="reference">U.S. Energy Information Administration</a> and is a great resource for anything energy data-related.  The site's most recent design updates provide GUI tools to explore various datasets.  However to really dig into and gather historical data en masse, it's easier to pull datasets in remotely.  Luckily, EIA has developed an API to allow for easy access to their data.  Full documentation for their API can be found <a href="http://www.eia.gov/beta/api/commands.cfm" class="reference">here</a></p>
+<p>Energy economics has always been an interest of mine, and I love keeping up to date on current developments in technology, as well as understanding historical trends in the economics of energy infrastructure, development, and commerce.  This project looks into historical trends in the energy industry, and involves a bit of data mining to learn more about energy.  In particular, this project looks at the production fuel sources, the generation of energy, and the consumption of energy.  </p>
 
+<p>The <a href="http://www.eia.gov" class="reference">US Energy Information Administration's website</a> is an excellent resource for anything energy data-related.  The site hosts a wide range of data covering virtually every aspect of the energy industry, and serves as a federal hub for public energy data.  This project uses Python (2.7) and Requests to remotely tap into the EIA's data via its API.  Once data is compiled, Pandas, Json, and Datetime are used to reorganize the data into a manageable data frame.  Using EIA's state-level data, heatmaps can be created with the help of a blank map of the United States in SVG format, along with the BeautifulSoup library.</p>
 
-
-<p>The two API calls that are used for this project in particular query EIA's datasets for keywords, and request data corresponding to specific data series IDs.</p>
+<p>My imports in Python for this project were as follows:</p>
 
 <!-- import libs -->
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
@@ -49,7 +49,17 @@
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pickle</span>
 </pre></div>
 
-<p>To access the EIA API, first <a href="http://www.eia.gov/beta/api/register.cfm" class="reference">complete registration</a> to receive an API key.  The key will be used every time a request for data is made.
+<p>Some things that might be helpful for fellow beginners in Python that are covered in this project include:</p>
+
+<ul>
+    <li>How to pull in website data with Requests</li>
+    <li>Making use of helper functions</li>
+    <li>How to manipulate data frames with Pandas</li>
+    <li>What json_normalize does</li>
+    <li>How to create a heatmap using an SVG file</li>
+</ul>
+
+<p>Before getting started in Python, it's probably better to get registering for an EIA API key out of the way.  The process is quite simple and can be done <a href="http://www.eia.gov/beta/api/register.cfm" class="reference">here</a>.  Once an API key is acquired, the next step is to start exploring what data the EIA site has to offer.</p>
 
 <h3>
 <a class="blog-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting Up</h3>
