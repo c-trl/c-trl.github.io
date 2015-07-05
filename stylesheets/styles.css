@@ -46,13 +46,6 @@ a small {
 
 }
 
-a.twitter-timeline {
-    width: 300;
-    height: 300;
-    data-chrome: nofooter noborders;
-    data-tweet-limit: none;
-}
-
 .wrapper {
   width:860px;
   margin:0 auto;
