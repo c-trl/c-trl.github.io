@@ -59,7 +59,7 @@
             <span style="color: #008000; font-weight: bold">print</span> {series[<span style="color: #BA2121">&#39;name&#39;</span>]:series[<span style="color: #BA2121">&#39;series_id&#39;</span>]}
 </pre></div>
 
-
+<br>
 
 <!-- search results -->
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">Search for Keyword: renewable energy
@@ -71,7 +71,7 @@ Search Results Found:
 {u&#39;Renewable energy production, Maine&#39;: u&#39;SEDS.REPRB.ME.A&#39;}
 </pre></div>
 
-
+<br>
 
 <!-- search_series() -->
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">df_i <span style="color: #666666">=</span> {}
@@ -100,13 +100,22 @@ Search Results Found:
         <span style="color: #008000; font-weight: bold">pass</span>
 </pre></div>
 
-
+<br>
 
 <!-- factors -->
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">factors <span style="color: #666666">=</span> [[<span style="color: #BA2121">&#39;SEDS.RETCB&#39;</span>, <span style="color: #BA2121">&#39;Renewable Consumption&#39;</span>],
 [<span style="color: #BA2121">&#39;SEDS.REPRB&#39;</span>, <span style="color: #BA2121">&#39;Renewable Production&#39;</span>],
 [<span style="color: #BA2121">&#39;SEDS.TEPRB&#39;</span>, <span style="color: #BA2121">&#39;Total Energy Production&#39;</span>],
 [<span style="color: #BA2121">&#39;SEDS.ESRCD&#39;</span>, <span style="color: #BA2121">&#39;Price of Residential Electricity&#39;</span>]]
+</pre></div>
+
+<br>
+
+<!-- compiling data -->
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> factor <span style="color: #AA22FF; font-weight: bold">in</span> factors:
+    query <span style="color: #666666">=</span> factor[<span style="color: #666666">0</span>]
+    save_as <span style="color: #666666">=</span> factor[<span style="color: #666666">1</span>]
+    search_series(query, save_as)
 </pre></div>
 
 
