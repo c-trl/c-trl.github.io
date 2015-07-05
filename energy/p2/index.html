@@ -33,11 +33,9 @@
         <h3>
 <a id="eia" class="anchor" href="#eia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Collecting Data on Energy</h3>
 
-<p>The U.S. Energy Information Administration has a <a class="reference" href="http://http://www.eia.gov/">great website</a> and is a go-to resource for anything energy data-related.  The site has gone through a number of design changes, and provides a great GUI tool to explore various datasets, however to really dig into historical data, it's easier to bring data in from the back.  Luckily, EIA has developed an API to allow for easy access to historical data with Python.  </p>
+<p>The EIA website hosts quite a large range of data on energy and the energy industry.  From the start, I knew I wanted to find state-level data on renewable energy production and data on residential electricity.  However, out of curiousity I created a short codebit that utilizes the API's keyword search call.  The call simply returns metadata on all series of data that are relevant to a provided keyword.  Using requests.get() and .text to return the text of the data, what is returned is JSON data in string format.  This can easily be converted into JSON format with json.loads.  Once in JSON format, data can be accessed a la indexing your way down the response's element tree, the same way you would access elements of a list or a dictionary.</p>
 
-<h3>
-<a class="blog-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting Up</h3>
-
+<p>Using search_keywords() returns the names of all relevant series, along with their corresponding series IDs.  These IDs are used to compile specific data.</p>
 
 
 <!-- search_keywords() -->
