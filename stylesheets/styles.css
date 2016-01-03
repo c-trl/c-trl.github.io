@@ -1,10 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Nobile);
+@import url(https://fonts.googleapis.com/css?family=Lato);
 
 body {
   padding:50px;
   font-family: 'Nobile', sans-serif;
   color:#333;
-  font-weight:300;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -42,6 +42,7 @@ h3, h4, h5, h6 {
 
 a {
   color:#39c;
+  font-family: 'Lato', sans-serif;
   font-weight:400;
   text-decoration:none;
 }
