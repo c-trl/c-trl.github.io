@@ -1,4 +1,4 @@
-<h3>A project to surface information</h3>  
+<h3>A project to surface information  </h3>
 about current legislation to webpage visitors based on vistor demographic attributes
 
 *Open Data & API (Tracks US Congress)*  
