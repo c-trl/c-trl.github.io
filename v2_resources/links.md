@@ -1,4 +1,4 @@
-`A project to surface current legislative information to webpage visitors based on vistor demographic attributes`
+<h3>A project to surface current legislative information to webpage visitors based on vistor demographic attributes</h3>
 
 *Open Data & API (Tracks US Congress)*  
 https://www.govtrack.us/developers
