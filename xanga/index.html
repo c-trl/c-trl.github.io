@@ -64,7 +64,7 @@ The great divide.
 <div class="content">
 <!--PREMISE-->
 <section>
-<h3>Remember Xanga?</h3>
+<h2>Remember Xanga?</h2>
 <p class="content">No?  That's okay, you're probably better of for it.  I started my own Xanga page a very long time ago mostly to safely rant online.  As is, was, and ever will be any other kid my age then, I needed a way to figure things out, and blogging helped me do that.  I would have kept blogging too, if it wasn't for you meddling kids [at WordPress].</p>
 
 <p class="content-image"><a href="http://i.imgur.com/P8Bi3qU.png"><img class="content" src="http://i.imgur.com/P8Bi3qU.png"></a></p>
@@ -79,23 +79,9 @@ The great divide.
 
 <p class="content">Oops.</p>
 
-<h3>What better way to do that than with Python!</h3>
+<h2>What better way to do that than with Python!</h2>
 
 <p class="content">I tried a few ways to get to the heart of my old content.  In retrospect, downloading the archived XML files might have been easier, but in all honestly, not nearly as fun.  I managed to pull in each page of my blog from WordPress using requests with Python.  I also tried urllib3, but requests seemed faster and far simpler.  After each page was pulled in, I converted the text to ASCII, although this step ended up being redundant once I got to using BeautifulSoup, which takes care of most - if not all - of text filtering and HTML parsing.  After going back to trim off the head and footer sections of each page and consolidating all the content into one string entity, I got to breaking out the NLTK (Natural Language Tool Kit).</p>
-<hr>
-<h3>Initial Descriptive Statistics</h3>
-<p class="content-image"><a href="http://imgur.com/feMAM8u.png" target="_blank"><img class="content" width=600px src="http://i.imgur.com/feMAM8u.png"></a></p>
-<p class="blogcaption">The average word is 4 letters long.  The longest word ended up being 'pizza'.  ...well, 'pizza..........................................'.</p>
-
-<h3>Frequency Analysis</h3>
-<p class="content-image"><a href="http://imgur.com/Im6TqRH.png" target="_blank"><img class="content" width=600px src="http://i.imgur.com/Im6TqRH.png"></a></p>
-<p class="blogcaption"></p>
-<p class="content-image"><a href="http://i.imgur.com/8SQy6pD.png" target="_blank"><img class="content" width=600px src="http://i.imgur.com/8SQy6pD.png"></a></p>
-<p class="blogcaption"></p><p class="content-image"><a href="http://i.imgur.com/KqktZhU.png" target="_blank"><img class="content" width=600px src="http://i.imgur.com/KqktZhU.png"></a></p>
-<p class="blogcaption"></p><p class="content-image"><a href="http://i.imgur.com/scFfEpd.png" target="_blank"><img class="content" width=600px src="http://i.imgur.com/scFfEpd.png"></a></p>
-<p class="blogcaption"></p>
-
-<h3 align="center"><a href="http://nbviewer.ipython.org/github/c-trl/nlp-with-xanga-entries/blob/master/requests.ipynb" target="_blank">Follow this project's progress in this ipython notebook</a></h3>
 </div>
 <!--INITIAL FINDINGS-->
 
