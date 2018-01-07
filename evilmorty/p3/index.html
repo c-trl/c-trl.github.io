@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>a-taste-of-soup</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>3. debugging</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11776,7 +11776,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">evilmorty</span> <span class="k">import</span> <span class="n">urls</span><span class="p">,</span> <span class="n">get_transcript</span>
 </pre></div>
 
 </div>
@@ -11787,6 +11787,32 @@ div#notebook {
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">urls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">get_transcript</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span> <span class="k">as</span> <span class="n">bs</span>
@@ -11801,7 +11827,642 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="A-taste-of-soup">A taste of soup<a class="anchor-link" href="#A-taste-of-soup">&#182;</a></h1><p>Given a base URL, locate the URLs for all the transcripts</p>
+<hr>
+<p>Some initial observations:</p>
+<ul>
+<li>Something is happening towards the end of the soup where dialogue is missing</li>
+<li>We can see Morty stammering a lot (amazing)</li>
+<li>We can distinguish actions/events from dialogue by parenthesis, asterisks, and square brackets.</li>
+<li>Italic tags aren't getting parsed properly</li>
+</ul>
+<p><sub><sup>elapsed mungetime: 10 minutes</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.-Something-is-happening-towards-the-end-of-the-soup-where-dialogue-is-missing">1. Something is happening towards the end of the soup where dialogue is missing<a class="anchor-link" href="#1.-Something-is-happening-towards-the-end-of-the-soup-where-dialogue-is-missing">&#182;</a></h3><p>First, we'll investigate the source page.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>http://rickandmorty.wikia.com/wiki/Pilot/Transcript
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looks like there might be some duplication and excess content.  We will a few more URLs.  BTW:</p>
+<p>Secondary observations:</p>
+<ul>
+<li>The actions are great info.  Apparently "Rick grabs Morty" MANY times.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">get_transcript</span><span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">soup</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Aaaaand it's broken.</p>
+<p>We now have 2 issues:</p>
+<ul>
+<li>Inaccurate HTML scraping</li>
+<li>Inconsistent tagging (this one I'm determining from the lack of an error and content returned)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>http://rickandmorty.wikia.com/wiki/Morty%27s_Mind_Blowers/Transcript
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_transcript</span><span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[81]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;div class=&#34;poem&#34;&gt;
+&lt;p&gt;[Rick, Morty, and Summer all fall out of a portal into the garage]&lt;br/&gt;
+&lt;b&gt;&lt;a class=&#34;mw-redirect&#34; href=&#34;/wiki/Morty&#34; title=&#34;Morty&#34;&gt;Morty&lt;/a&gt;&lt;/b&gt;: &lt;a class=&#34;mw-redirect&#34; href=&#34;/wiki/Summer&#34; title=&#34;Summer&#34;&gt;Summer&lt;/a&gt;, next time we&#39;re hiding in a Colorkian echo nest, can you do me a favor and turn your ringer off?&lt;br/&gt;
+&lt;b&gt;Summer&lt;/b&gt;: It&#39;s called &#34;carpe diem&#34;, Morty. Look it up.&lt;br/&gt;
+&lt;b&gt;Morty&lt;/b&gt;: &lt;i&gt;You&lt;/i&gt; look it up! Y-Y-You don&#39;t even-You don&#39;t even know what it means!&lt;br/&gt;
+&lt;b&gt;Summer&lt;/b&gt;: That&#39;s because losers look stuff up while the rest of us are carpin&#39; all them diems.&lt;br/&gt;
+[Summer hi-fives Rick]&lt;br/&gt;
+&lt;b&gt;Rick&lt;/b&gt;: Listen to your sister, Morty. To live is to risk it all. Otherwise, you&#39;re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you. Oh, I&#39;m sorry, Jerry, I didn&#39;t see you there. H-How much of that did you hear? &lt;br/&gt;
+&lt;b&gt;Jerry&lt;/b&gt;: All of it. You were looking right at me. I just wanted to say goodbye to the kids.&lt;br/&gt;
+&lt;b&gt;Rick&lt;/b&gt;: Cool. Just stay in the driveway. The killbots are live, and I took you off the whitelist.&lt;br/&gt;
+[Rick begins using a screwdriver on a gun]&lt;br/&gt;
+&lt;b&gt;Morty&lt;/b&gt;: W-We&#39;ll see you every other weekend, though, right?&lt;br/&gt;
+&lt;b&gt;Rick&lt;/b&gt;: Absolutely, Morty. A-And your mom&#39;s lawyer says if I can get enough in the settlement, he can help me sue for full custody.&lt;br/&gt;
+&lt;b&gt;Morty&lt;/b&gt;: Th-That&#39;ll be nice. Uh, Summer, Dad&#39;s leaving!&lt;br/&gt;
+&lt;b&gt;Summer&lt;/b&gt;: Bye, Dad. Rick, didn&#39;t you say you needed my help on an adventure immediately somewhere else I don&#39;t care even if it might kill us?&lt;br/&gt;
+&lt;b&gt;Rick&lt;/b&gt;: I did not, but if you&#39;re really that alienated, I&#39;m as willing to exploit it as the next guy, church, army, or Olympic gymnastics trainer.&lt;br/&gt;
+[Rick shoots open a portal in the ground]&lt;br/&gt;
+&lt;b&gt;Summer&lt;/b&gt;: I&#39;m ready when you a--&lt;br/&gt;
+[Summer jumps into the portal and exits]&lt;br/&gt;
+&lt;b&gt;Rick&lt;/b&gt;: Bitch, I was ready yest--&lt;br/&gt;
+[Rick jumps into the portal and exits]&lt;br/&gt;
+&lt;b&gt;Jerry&lt;/b&gt;: Bye, sweetie.&lt;br/&gt;
+&lt;b&gt;Morty&lt;/b&gt;: Well, I-I better--&lt;br/&gt;
+&lt;b&gt;Jerry:&lt;/b&gt; Sure. Sounds important.&lt;br/&gt;
+[Morty jumps into the portal and exits]&lt;br/&gt;
+[Beth enters the garage]&lt;br/&gt;
+If you&#39;re looking for our kids, your father did a-a portal, uh--&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Okay.&lt;br/&gt;
+[Beth exits. Jerry begins to walk out of the garage but stops. Some leaves blow in the wind]&lt;br/&gt;
+&lt;b&gt;Wind: (faint)&lt;/b&gt; Loser...&lt;br/&gt;
+&lt;b&gt;Jerry&lt;/b&gt;: What? Hello?&lt;br/&gt;
+[Transition to Rick driving Summer and Morty in a turquoise car through the desert, being chased by other cars]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Morty, shoot the mohawk guy!&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; They all have mohawks!&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; High fade, chartreuse with cyan highlights, layered on top. Shoot him! &lt;br/&gt;
+[Morty loads a shotgun and shoots at the vehicle behind them, but misses, while &lt;a href=&#34;/wiki/Mohawk_Guy&#34; title=&#34;Mohawk Guy&#34;&gt;Mohawk Guy&lt;/a&gt; jumps onto the back of their car]&lt;br/&gt;
+&lt;b&gt;Mohawk Guy:&lt;/b&gt; Ah!&lt;br/&gt;
+Death Stalker #1: Light them up.&lt;br/&gt;
+&lt;b&gt;Mohawk Guy:&lt;/b&gt; Ahh!&lt;br/&gt;
+[Mohawk Guy presses a button and self-destructs]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Fuck! Get in the game, Morty!&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Give me your flask!&lt;br/&gt;
+[Rick hands Summer his flask. Summer chugs some alcohol from it, then spits it into the engine, propelling the car forward]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Holy shit, Summer for the win! &lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; I fucking love post-apocalyptic versions of Earth!&lt;br/&gt;
+[A machine begins to beep rapidly.]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Here we go.&lt;br/&gt;
+[Rick pulls the car over, as him, Summer, and Morty all exit.]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Isotope 322. &lt;br/&gt;
+[Rick picks up a glowing green shard with a pair of tweezers and puts it into a container. It floats in the container.]&lt;br/&gt;
+This stuff&#39;s so powerful, Morty, it makes Isotope 465 look like Isotope 317.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Uh-huh, yeah, is it powerful enough to keep those guys from murdering us?!&lt;br/&gt;
+[Morty points towards the car that was coming towards them which is quickly approaching them. Summer grabs a shotgun from the front seat of the car]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Summer!&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Hold on. I want to try something.&lt;br/&gt;
+[Rick shoots the portal gun at the ground, opening up a portal]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Rick, can we not leave without my sister?!&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Ugh. You have infinite sisters, Morty. I mean, n-not that I want to spend the rest of my day looking for another one. Sum-sum, let&#39;s go! Grandpa&#39;s concern for your safety is fleeting!&lt;br/&gt;
+&lt;b&gt;&lt;a href=&#34;/wiki/Colossus&#34; title=&#34;Colossus&#34;&gt;Colossus&lt;/a&gt;:&lt;/b&gt; Your blood will be my lotion.&lt;br/&gt;
+[Summer aims the shotgun at Colossus&#39;s car, which is now directly in front of her, and shoots at the front tire. The car flips over and Colossus flies out.]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Whoa. &lt;i&gt;That&lt;/i&gt; was cool.&lt;br/&gt;
+[Colossus claws his way away from the ruined car and looks up at Summer]&lt;br/&gt;
+&lt;b&gt;Colossus&lt;/b&gt;: Kill me, please.&lt;br/&gt;
+&lt;b&gt;Summer&lt;/b&gt;: Okay, but not because you told me to.&lt;br/&gt;
+[Summmer shoots and kills Colossus]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt;Summer!&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Okay, getting darker.&lt;br/&gt;
+[Summer turns around to see a fleet of cars coming towards her. She puts one foot on Colossus&#39;s dead body.]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Jesus Christ. Summer! &lt;br/&gt;
+[Morty runs towards Summer]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Aw, come on.&lt;br/&gt;
+[Rick, annoyed, runs after Morty while taking a gun out of his coat pocket. &lt;a href=&#34;/wiki/Hemorrhage&#34; title=&#34;Hemorrhage&#34;&gt;Hemorrhage&lt;/a&gt; exits his car and puts a fist up to the men behind him, who are also exiting their cars.]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Hands and little shoulder-mounted dudes where I can see them!&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; I am Hemorrhage. You have removed weak blood from us and made us stronger. We can combine our strength and feast on the weak together.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Wh-Wh-What in the hell are you saying?&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; They don&#39;t have to keep trying to kill us if we join them. They&#39;re basically pussies.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; What is your deal lately? &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; All right, let&#39;s get sloppy. Oh, whoa. Uh, uh, what&#39;s, uh-What&#39;s that little bauble you got back there? &lt;br/&gt;
+[Rick points at a glowing green rock positioned atop a small hill]&lt;br/&gt;
+Th-Th-That&#39;s interesting.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; That is our glowing rock. We carry it with us for desecration, to remind us there are no gods.&lt;br/&gt;
+[Rick holds up machine which was beeping before and it begins to beep again in the presence of the rock]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Kids, weird pitch: let&#39;s have this be our new life. Let&#39;s be post-apocalyptic scavengers!&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; (grinning) Okay.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; What?!&lt;br/&gt;
+[Transition to Death Stalkers camp. Rick, Morty, and Summer are waiting in a lunch line.]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Grandpa, some of the Death Stalkers are going to what used to be Seattle to hunt what used to be people. I&#39;m going.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Sounds good. Stay hydrated.&lt;br/&gt;
+[Summer exits]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Listen, Rick, Summer&#39;s been acting pretty crazy lately. You know, I mean, I-I think the divorce is affecting her. And, you know, I don&#39;t think this is a great place for her to be right now.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Oh, get off your high horse, Professor Ski Lodge. This world may be rough around the edges, but it&#39;s got its charms.&lt;br/&gt;
+&lt;b&gt;Lunch server:&lt;/b&gt; Bicep or quadricep?&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Uh... [clears throat] bicep.&lt;br/&gt;
+[The lunch server puts a human bicep onto Rick&#39;s plate. Rick takes a piece off of it, observes it, then eats it. He chews it for a while while Morty angrily stares at him]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; (after a short pause) Seriously, Rick? Is it really easier to eat human flesh than to just tell me why we&#39;re still here? &lt;br/&gt;
+[Rick takes the piece he was chewing out of his mouth]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; No. Okay, I&#39;ll level with you.&lt;br/&gt;
+[Rick grabs Morty by the arm and drags him to the glowing green rock, which some Death Stalkers are happily gathered around]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; You see that green rock, Morty? It&#39;s about 20 pounds of the stuff I was getting all hard for a flake of.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Isotope 322.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Well, having a 20-pound boulder of it is better than having a flake. I can explain the math to you later, but--&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Summer just ran off with strangers that have &#34;Death&#34; in their name, and the rest of their name was &#34;Stalkers&#34;!&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Huh, could be therapeutic for her. She has been acting pretty crazy lately, Morty. I mean, her parents &lt;i&gt;are&lt;/i&gt; going through a divorce.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Damn it, Rick, that&#39;s what I-- Fine. Just grab the stupid thing while I grab her, and let&#39;s get the &#34;F&#34; out of &#34;H&#34;!&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; No, no, no. Morty, there&#39;s too much heat on the bogey. I need you to distract the camp.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; &#34;Distract&#34;? They eat each other. Wha-What do you want me to do to get their attention, put on a puppet show?&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Right idea, wrong genre, Morty. The equivalent here would be...&lt;br/&gt;
+[Rick glances over at the &lt;a class=&#34;new&#34; href=&#34;/wiki/Blood_Dome?action=edit&amp;amp;redlink=1&#34; title=&#34;Blood Dome (page does not exist)&#34;&gt;Blood Dome&lt;/a&gt;] &lt;br/&gt;
+Hey, you guys ever use that Thunderdome, or do you just put it up for decoration?&lt;br/&gt;
+&lt;b&gt;Death Stalker #2:&lt;/b&gt; Uh, you mean the Blood Dome? &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Save it for the Semantics Dome, E.B. White.&lt;br/&gt;
+&lt;b&gt;Death Stalker #3:&lt;/b&gt; (offscreen) Ooh, burn!&lt;br/&gt;
+[Rick snaps his fingers and points a finger gun at Death Stalker #3 while winking]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; The important question is, who wants to take a poke at my man Spine Eater here? &lt;br/&gt;
+[Rick points at Morty. The Death Stalkers cheer]&lt;br/&gt;
+I guess I&#39;ll see your asses in that dome!&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Rick, what the hell, man?! Wh-What are you, out of your mind?!&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Morty, relax. You&#39;re gonna be a ringer. Come here. &lt;br/&gt;
+[Rick drags Morty by the arm and takes him behind a truck. He pulls out a device]&lt;br/&gt;
+This device extracts and redistributes muscle memory.&lt;br/&gt;
+[Rick sticks the syringe part of the device into a dangling, muscular arm and pulls out some red liquid from it as the arm shrinks]&lt;br/&gt;
+I&#39;m giving your body a 10-year course in wasteland combat one limb at a time.&lt;br/&gt;
+[Rick sticks the syringe into Morty&#39;s arm]&lt;br/&gt;
+Ow!&lt;br/&gt;
+[Morty&#39;s arm begins to swell up and turn into &lt;a href=&#34;/wiki/Armothy&#34; title=&#34;Armothy&#34;&gt;Armothy&lt;/a&gt;]&lt;br/&gt;
+I&#39;m working with a mixed bag here, so you may not have perfect coordination, Morty--&lt;br/&gt;
+[Rick sticks the syringe into another arm and extracts more red liquid, but &lt;a href=&#34;/wiki/Armothy&#34; title=&#34;Armothy&#34;&gt;Armothy&lt;/a&gt; slaps the device out of his hand]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Ugh! Hey!&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; I-I didn&#39;t do that!&lt;br/&gt;
+[Morty punches Rick with &lt;a href=&#34;/wiki/Armothy&#34; title=&#34;Armothy&#34;&gt;Armothy&lt;/a&gt; and Rick&#39;s nose begins to bleed]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Okay, this is exciting. We&#39;re making some discoveries about muscle memory.&lt;br/&gt;
+[Armothy starts moving Morty toward the Blood Dome]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Ooh! Help! Help! &lt;br/&gt;
+[Armothy grabs onto the Blood Dome. Morty jumps in and crushes a Death Stalker with Armothy] &lt;br/&gt;
+&lt;b&gt;Death Stalker #4:&lt;/b&gt; Oh, sweet, man!&lt;br/&gt;
+&lt;b&gt;&lt;a href=&#34;/wiki/Eli&#34; title=&#34;Eli&#34;&gt;Eli&lt;/a&gt;:&lt;/b&gt; And so it begins, my pretties!&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Oh, God! Stop! Stop! This is horrible!&lt;br/&gt;
+[Morty chokes another Death Stalker with Armothy] &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Just stick and moo-[burps]-oove, Morty! Wear him out!&lt;br/&gt;
+[Rick walks towards the glowing rock. Transition to Summer, Hemorrhage, and &lt;a href=&#34;/wiki/Blue_Footprint_Guy&#34; title=&#34;Blue Footprint Guy&#34;&gt;Blue Footprint Guy&lt;/a&gt; walking through an abandoned city, while Hemorrhage and Blue Footprint Guy shoot and kill some mutants]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; How come you guys dress like you&#39;re in a theme-park stunt show, but these guys wear khakis and hockey jerseys?&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; After the &#34;boom-boom&#34;, some adapted to the new truth, and some chose to huddle near the boomy holes, clinging to the lie of the beforefore times. The raidy-rays rotted them away, leaving only their love for the vertvertisements on billyboards.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Jesus Christ, did the &#34;boomy-booms&#34; blow up all your &#34;wordy-word books&#34;? &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; You mean dictionaries?&lt;br/&gt;
+[Four mutants charge towards Summer and Hemorrhage. They shoot and kill all of them. Hemorrhage leans over to look at the fallen billboard advertisement. He touches an image of a young boy]&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; I think I was a child before the boom-booms. I think I looked like this.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Want to piss on it? &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Get out of my head.&lt;br/&gt;
+[Transition to Morty in the Blood Dome, smashing a Death Stalker&#39;s head with Armothy]&lt;br/&gt;
+&lt;b&gt;Eli:&lt;/b&gt; Ha ha! Whoo! Unbelievable! A new champ!&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Okay, no more!&lt;br/&gt;
+[Armothy gestures for more]&lt;br/&gt;
+&lt;b&gt;Eli:&lt;/b&gt; And he wants more!&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; No, I don&#39;t!&lt;br/&gt;
+[Armothy does Hulk Hogan&#39;s &#34;I can&#39;t hear you&#34; pose]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Someone, make this stop! &lt;br/&gt;
+[Another Death Stalker jumps into the Blood Dome]&lt;br/&gt;
+Mister, please get out of here, or you&#39;re gonna die!&lt;br/&gt;
+[The Death Stalker runs up to Morty]&lt;br/&gt;
+I have nothing to do with this! &lt;br/&gt;
+[Summer and Hemorrhage walk up to the Blood Dome]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Morty.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; (while beating up the Death Stalker) Why would you want this to happen? All you had to do was go away! Stop standing in the driveway talking about custody! And either tell her you want to stay married or get on with your life, but whatever you do, stop being a baby and act like a man! &lt;br/&gt;
+[Armothy punches off the man&#39;s head. Morty looks at Armothy]&lt;br/&gt;
+Thank you.&lt;br/&gt;
+[Armothy gives a thumbs up. Summer runs up to Morty and gives him a hug]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Morty, that was amazing! This is my brother! Not that family means anything! &lt;b&gt;Hemorrhage:&lt;/b&gt; This family does.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; All right. Good job, champ. Um, can I talk to you kids for a second over yonder? &lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Rick, I-I-I think I&#39;m breaking through to something here. C-Can we not leave just yet? &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Leave? &lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; I&#39;m not leaving.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; There is no &#34;leave&#34;. We are united, or we are enemies.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Oh, big guy, no. Nobody&#39;s leaving. Don&#39;t be stupid. We love being united. We love the radiation, the trichinosis. We&#39;re in it for life, which I assume is around 20 years, average. I just need a quick aside with my grandkids, about 40 yards from anyone else.&lt;br/&gt;
+&lt;b&gt;Death Stalker #5:&lt;/b&gt; Hey, the Green Rock is gone!&lt;br/&gt;
+&lt;b&gt;Death Stalker #6:&lt;/b&gt; (offscreen) Oh, no!&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Uh, I know why don&#39;t we all split up and look for it in groups of three? Kids?&lt;br/&gt;
+[Armothy pulls the green rock out of Rick&#39;s messenger bag]&lt;br/&gt;
+Ooh.&lt;br/&gt;
+[Rick pulls out a gun]&lt;br/&gt;
+We&#39;ll be right back.&lt;br/&gt;
+[Transition to Rick driving quickly through the desert, holding a gun and being trailed by Death Stalkers. Summer and Hemorrhage, who are driving together, drive next to him.]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Grandpa, you&#39;re being stupid! Just surrender, and our friends will give you mercy!&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Kiss my ass, Summer! Your friends have no mercy!&lt;br/&gt;
+[Rick shoots and kills two female Death Stalkers]&lt;br/&gt;
+They&#39;re lame!&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Death Stalkers, bring me his flesh leather!&lt;br/&gt;
+[A Death Stalker with a knife jumps onto Rick&#39;s car. Morty pulls up to Rick&#39;s car and shoots the Death Stalker, while Armothy drives]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Sorry, but can we not kill him? C-Can we just take him prisoner? &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; When did I lose control here? &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Listen to me! Both of you kids need to get out of this environment so we can properly deal with your parents&#39; divorce! Alternatively, I have a freaking portal gun, and I can leave the two of you here forever! &lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Why does it have to be such a dramatic choice? Can&#39;t we arrange a thing where we spend weekends here or or visit home to do laundry? &lt;br/&gt;
+[A Death Stalker with a turret shoots at Rick&#39;s car]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; All right, you know what? Fuck it!&lt;br/&gt;
+[Rick shoots a portal at the ground in front of him. The front of his car falls into the portal while the back gets stuck in the other universe, which causes the car behind him to flip over. Transition to Rick in the front of the car which is hanging from the ceiling of the garage. He begins to exit, but Blue Footprint Guy assaults him from the passenger seat. He begins to choke Rick.] &lt;br/&gt;
+&lt;b&gt;Blue Footprint Guy:&lt;/b&gt; My body is chrome! My blood is gasoline!&lt;br/&gt;
+[Rick kicks Blue Footprint Guy off of him and he falls under the car, which also falls onto his head, crushing and killing him] &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Nope, regular blood.&lt;br/&gt;
+[Beth enters from inside the house]&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Dad?&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Hi, sweetie.&lt;br/&gt;
+&lt;b&gt;Beth&lt;/b&gt;: Where are the kids? &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Oh, th-they aren&#39;t with you? I thought they were with you. Oh, y-you know what? Uh, I just remembered. They&#39;re out doing something completely ordinary and kid-related. Don&#39;t panic.&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Not panicked. At all.&lt;br/&gt;
+[Rick pulls out a flask from his coat and nervously drinks]&lt;br/&gt;
+Just...Oh, God, what&#39;s the divorce doing to the kids? What&#39;s it doing to me? Did I make a mistake? &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Not a mistake, no!&lt;br/&gt;
+[Rick puts the flask back in his coat]&lt;br/&gt;
+I mean, not that I have a horse in this race, but this divorce decision listen,&lt;br/&gt;
+[Rick does an Italian chef kiss]&lt;br/&gt;
+mwah! Good for you, good for the kids. I mean, honestly, I think that they&#39;re flourishing.&lt;br/&gt;
+I mean, you&#39;ll see, when when when you see them, that that they&#39;re totally flourishing.&lt;br/&gt;
+[Transition to Morty, angrily beating up and killing another Death Stalker in the Blood Dome]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Booyah! Fuck you, pal! Who else wants some? Who wants to be my pussy of a dad today? &lt;br/&gt;
+[Armothy waves in front of Morty&#39;s face]&lt;br/&gt;
+Hey, what&#39;s what&#39;s wrong, man? You&#39;re not getting weak on me, are you?&lt;br/&gt;
+[Armothy points up at a man sitting in the bleachers outside of the Blood Dome. He is wearing a soldier&#39;s armor]&lt;br/&gt;
+&lt;b&gt;Soldier:&lt;/b&gt; What? Wait a minute.&lt;br/&gt;
+[Transition to a first-person flashback of Armothy chopping wood in a quaint, peaceful village. He stops when he hears a woman scream, and looks up to find houses burning and men riding in on horses, shooting at the villagers with bows and killing a man. Transition to the village burning, with Armothy lying on the ground with a large cut in his wrist. The soldier from the bleachers walks up to him]&lt;br/&gt;
+&lt;b&gt;Soldier:&lt;/b&gt; What&#39;s the matter, you piece of crap? Haven&#39;t you ever watched your family burn to death before? Now I&#39;m gonna whip you. Ha!&lt;br/&gt;
+[The soldier whips Armothy. Transition to present time, with Armothy still pointing at the soldier in the bleachers]&lt;br/&gt;
+&lt;b&gt;Soldier:&lt;/b&gt; It can&#39;t be. It can&#39;t be!&lt;br/&gt;
+[The soldier jumps off the bleachers and is running away]&lt;br/&gt;
+I was just following orders --&lt;br/&gt;
+[Morty starts getting moved towards the man by Armothy]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Whoa, whoa!&lt;br/&gt;
+&lt;b&gt;Soldier:&lt;/b&gt; -- I was just following orders! &lt;br/&gt;
+[Armothy swings open the door to the Blood Dome, which knocks over a Death Stalker]&lt;br/&gt;
+&lt;b&gt;Death Stalker #7:&lt;/b&gt; Ahh! &lt;br/&gt;
+&lt;b&gt;Soldier:&lt;/b&gt; I&#39;ll tell you where my boss lives! He&#39;s in the castle!&lt;br/&gt;
+[Armothy punches the soldier into a couch] &lt;br/&gt;
+He&#39;s in the castle!&lt;br/&gt;
+[Armothy picks up a torch and throws it at the soldier, setting him on fire and killing him]&lt;br/&gt;
+Ahh! Aggggh!&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; This isn&#39;t over, is it?&lt;br/&gt;
+[Armothy gives a thumbs-down]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; That means, no, it isn&#39;t over, or you disapprove of the question?&lt;br/&gt;
+[Armothy shakes his hand and puts his pointer finger up, then gives another thumbs-down] Uh, m-make a fist if this isn&#39;t over.&lt;br/&gt;
+[Armothy makes a fist]&lt;br/&gt;
+This isn&#39;t over.&lt;br/&gt;
+[Transition to Hemorrhage, using the a wrench on the engine of a car. He throws the wrench onto the ground]&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Ugh!&lt;br/&gt;
+[Summer enters]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Hey, sorry my Grandpa stole your god and ruined your car.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; We don&#39;t apologize, and we have no god. But this cracked drive shaft brings me great pain. There is no deeper bond than the one between a Death Stalker and his car.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; What about the weird guys on leashes, then?&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; They&#39;re more like interns.&lt;br/&gt;
+[Hemorrhage pulls out an adjustable wrench from behind him]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Cool, cool.&lt;br/&gt;
+[Hemorrhage drops the wrench. Summer and Hemorrhage both reach for it.]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Sorry.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; It&#39;s okay.&lt;br/&gt;
+[Summer touches Hemorrhage&#39;s helmet]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Can I see? &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; No one has seen my true face and lived.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Well, I&#39;m not afraid to die, and I don&#39;t care what you look like.&lt;br/&gt;
+[Hemmorhage starts to pull off his helmet. Summer gasps. Hemmorhage pulls off his helmet. He is a blonde man with a mustache.]&lt;br/&gt;
+Oh.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Hmm? &lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; I just...I didn&#39;t expect you to have a mustache.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; You hate it.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; No. I like it. I guess -- How do I explain this? A metal bucket is, on a certain level, a kind of &#34;mustache,&#34; in that it&#39;s a specific facial accessory. So, it&#39;s kind of like...Do you guys have the phrase &#34;hat on a hat&#34;? &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; I can shave it.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; No. I like it. And obviously what I like shouldn&#39;t matter. It&#39;s you.&lt;br/&gt;
+&lt;b&gt;Hemmorhage:&lt;/b&gt; Yeah, yeah, I know, a-and nothing does matter. Obviously, I know that. I&#39;m not weak. I&#39;m just thinking, &#34;Well, why not get rid of this?&#34; You just kill everyone that sees it, and it&#39;s and it&#39;s hot under here (looks at helmet) wh-which, by the way, is why I shave the beard part. So, right there, I&#39;m making a decision based on vanity, which is what I was trying to avoid with the whole bucket over the head because who am I and why am I grooming myself? Why don&#39;t I just wear a tie, right? I mean, it&#39;s like that guy you killed when I met you, with the burnt dolls on his body. I hated that guy, because, why-why are you doing that? And how can you not see how fake that is? And the whole time, I&#39;m the same thing. I&#39;m just a fake mess, and there&#39;s no escaping it because --&lt;br/&gt;
+[Summer kisses Hemorrhage. They start making out on a table. A man in a mask on a leash crawls into the hut]&lt;br/&gt;
+&lt;b&gt;Leash Man:&lt;/b&gt; Hey, I&#39;m doing a coffee run -- Never mind.&lt;br/&gt;
+[The man on the leash crawls back out. Transition to Rick, positioning the head of &lt;a href=&#34;/wiki/Mechanical_Summer&#34; title=&#34;Mechanical Summer&#34;&gt;Mechanical Summer&lt;/a&gt;. He flips a switch on the back of her neck]&lt;br/&gt;
+&lt;b&gt;Mechanical Summer:&lt;/b&gt; I am Summer.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Summer, state your deal.&lt;br/&gt;
+&lt;b&gt;Mechanical Summer:&lt;/b&gt; My deal is that I am, like, totally fine.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Morty? &lt;br/&gt;
+&lt;b&gt;Mechanical Morty:&lt;/b&gt; Aw, geez, I&#39;m so down with my parents&#39; divorce, dawg. Like, don&#39;t even trip, like, in a healthy way.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; All right.&lt;br/&gt;
+[Rick rubs his hands together]&lt;br/&gt;
+It&#39;s dinnertime.&lt;br/&gt;
+[Transition to the dinner table. Beth drinks a glass of wine]&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Thanks, everybody, for sitting down for a real dinner.&lt;br/&gt;
+&lt;b&gt;MS, MR, and Rick, in unison:&lt;/b&gt; No problem.&lt;br/&gt;
+&lt;b&gt;Mechanical Summer:&lt;/b&gt; Its benefits are totally, like, less about the food than the emotional nourishment.&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Uh, okay, weirdo. [laughs]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Ah ha ha ha, yeah. Dial it back, Summer. By 15% and increase dynamic movement by 3. Am I right? &lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; How&#39;s school, Morty?&lt;br/&gt;
+&lt;b&gt;Mechanical Morty:&lt;/b&gt; I like school and stuff, kind of. And I&#39;m getting better grades than when you and Dad were -- quote mode -- &#34;staying together for the kids.&#34; End quote mode.&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; &#34;Quote mode&#34;. I like that. You millennials. Are you guys millennials, or are they like 40 now? &lt;br/&gt;
+&lt;b&gt;Mechanical Summer:&lt;/b&gt; All I know is, totally, you look great.&lt;br/&gt;
+&lt;b&gt;Mechanical Morty:&lt;/b&gt; Aw, geez, Mom, you look all kind of great and stuff. It&#39;s crazy.&lt;br/&gt;
+&lt;b&gt;Mechanical Summer:&lt;/b&gt; So happy.&lt;br/&gt;
+&lt;b&gt;Mechanical Morty:&lt;/b&gt; So happy. Happy family, man. We got this family in the bag.&lt;br/&gt;
+[Beth starts to cry]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Oh, sweetie, d-don&#39;t. Listen. Don&#39;t -- &lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; I don&#39;t know why I&#39;m crying. It&#39;s not --&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Well, try crying 15% less?&lt;br/&gt;
+&lt;b&gt;Mechanical Summer:&lt;/b&gt; Mom, emotions are human. You&#39;re not, like, a computer inside a mechanical doll.&lt;br/&gt;
+&lt;b&gt;Mechanical Morty:&lt;/b&gt; Yeah. Geez, Mom. Your feelings are not only forgivable, they are the very meaning of life that only pre-silicon, carbon-based entities can ever grasp.&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; I have to call Jerry.&lt;br/&gt;
+[Beth gets out of her chair and walks to the kitchen]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; You do?! What the fuck is wrong with you two? The point of automation is to reduce cost and labor.&lt;br/&gt;
+&lt;b&gt;Mechanical Summer:&lt;/b&gt; Your feelings are coming from a --&lt;br/&gt;
+[Rick flips the switch on the back of Mechanical Summer&#39;s neck. She turns off and her face falls into the spaghetti]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Tell it to my bread in the morning. You just became my backup toaster.&lt;br/&gt;
+&lt;b&gt;Mechanical Morty:&lt;/b&gt; Aw, geez, my sister died in the spaghetti --&lt;br/&gt;
+[Rick turns Mechanical Morty off and his face also falls into his spaghetti. Transition to Morty and Armothy sneaking into a castle. They fight and kill two guards. Transition to the &lt;a href=&#34;/wiki/Slaveowner&#34; title=&#34;Slaveowner&#34;&gt;Slaveowner&lt;/a&gt; sitting in a bathtub, with two blonde boys sitting on either side of him]&lt;br/&gt;
+&lt;b&gt;Slaveowner:&lt;/b&gt; Graze my genitals again, &lt;a href=&#34;/wiki/Taint_Washer&#34; title=&#34;Taint Washer&#34;&gt;Taint Washer&lt;/a&gt;, and you&#39;ll be shipped to the wasteland. And as for you, &lt;a href=&#34;/wiki/Genital_Washer&#34; title=&#34;Genital Washer&#34;&gt;Genital Washer&lt;/a&gt; --&lt;br/&gt;
+[Morty bursts in through a window]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Ahh! Oh, gee! &lt;br/&gt;
+[Genital Washer and Taint Washer run out of the room. Two soldiers charge towards Morty. Armothy kills them both, picks up one of their swords and drops it. He moves Morty towards the slaveowner and cracks his knuckles]&lt;br/&gt;
+&lt;b&gt;Slaveowner:&lt;/b&gt; Oh, god. Look, whoever you are, you should know that killing me won&#39;t change a thing.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; L-Look, man, I&#39;m just along for the ride on this one. You know, y-y-y-y-you&#39;re preaching to the choir here.&lt;br/&gt;
+&lt;b&gt;Slaveowner:&lt;/b&gt; Please. Slavery was a family business. I didn&#39;t ask to be born into it. If anything, I&#39;m the victim here!&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Uh, Armothy, can I steal you for a second? E-E-Excuse us, sir.&lt;br/&gt;
+[Morty turns away from the slaveowner]&lt;br/&gt;
+So, this is it, isn&#39;t it? This is the guy? &lt;br/&gt;
+[Armothy shakes his fist &#34;yes&#34;]&lt;br/&gt;
+So, does that mean you&#39;ll be going away? Like, does it work like a ghost? Like, is is this your unfinished business? &lt;br/&gt;
+[Armothy gives a &#34;so-so&#34; gesture]&lt;br/&gt;
+Wh-What if we didn&#39;t do it? What if we just went back to the Blood Dome and just kept taking our baggage out on unrelated people?&lt;br/&gt;
+[Morty tears up]&lt;br/&gt;
+I mean, w-we could do that forever. I mean, I-I know it&#39;s less healthy, but w-w-we&#39;d be together and --&lt;br/&gt;
+[Armothy puts a &#34;hush&#34; finger up to Morty&#39;s mouth]&lt;br/&gt;
+&lt;b&gt;Slaveowner:&lt;/b&gt; I mean, I-I know what I&#39;d vote for, if you&#39;re feeling out the room.&lt;br/&gt;
+[Armothy points at the slaveowner, then wipes away Morty&#39;s tears]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; You&#39;re right. We both got to see our stuff through. I got to deal with my parents&#39; divorce, and you got to, you know, do what you got to do. I love you.&lt;br/&gt;
+[Armothy and Morty hug/Morty hugs himself]&lt;br/&gt;
+&lt;b&gt;Slaveowner:&lt;/b&gt; Aw, fuck!&lt;br/&gt;
+[Armothy starts to choke the slaveowner, while Morty notices that Rick is holding some vials on the other side of the room]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Rick? &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Sorry, sorry. I-I-I can wait for this to wrap up. Don&#39;t let me distract you.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Yeah, well, too late.&lt;br/&gt;
+[Armothy dunks the slaveowner&#39;s head underwater]&lt;br/&gt;
+Just tell me what you want.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; I want you and your sister to come home.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Oh, but don&#39;t don&#39;t you have infinite versions of me and my sister?&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; You don&#39;t have to kick me while I&#39;m down, Morty. Look, there&#39;s no replacing either of you without an amount of work that would ultimately defeat the purpose.&lt;br/&gt;
+[Armothy continues to choke the slaveowner underwater. The slaveowner loses consciousness]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Maybe the lesson we&#39;ve learned is that, whether it&#39;s our parents&#39; marriage, a glowing green rock, or an awesome, giant arm, sooner or later, we got to let it go.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; I don&#39;t know if that applies to the throats of murder victims, Morty.&lt;br/&gt;
+[The slaveowner starts gasping for air in between gargles of water]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt;Shit! Wh-Wh-Wh-What do I --&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Well, the longer you wait, Morty, the more it&#39;s gonna feel like committing a whole murder. I think your arm just called it too early because it wasn&#39;t the arm of a paramedic. Here.&lt;br/&gt;
+[Rick takes Morty&#39;s hand and puts it around the slaveowner&#39;s throat, choking him]&lt;br/&gt;
+It&#39;s the least I can do. I-I-I-I owe you this much. See, Morty? Now we&#39;re &lt;i&gt;both&lt;/i&gt; accountable.&lt;br/&gt;
+[Transition to Summer and Hemorrhage driving a car through the desert, with a fleet of other cars next to them, with Rick and Morty driving towards them from the opposite directiion. Summer and Hemorrhage pull their car over and so do Rick and Morty. The four exit their vehicles with Rick holding the glowing green rock.]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; The reason I wanted this is because it can do this.&lt;br/&gt;
+[Rick puts a lightbulb on top of the rock and it lights up]&lt;br/&gt;
+This is a really special thing. I mean, you could use it to power all your vehicles. You wouldn&#39;t be reliant on gasoline. You&#39;ll be the most advanced tribe of radioactive cannibals in the whole --&lt;br/&gt;
+[Rick gives the rock to Hemorrhage]&lt;br/&gt;
+-- this version of the world.&lt;br/&gt;
+[Rick shoots a portal at the ground and starts walking towards it] &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Wait. Can you stay to show us more? &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; You don&#39;t have to ask me twice. Home is nuts right now. My daughter&#39;s going through a divorce, and I am not dealing with it in a healthy way at all.&lt;br/&gt;
+[A title card reads &#34;THREE WEEKS LATER&#34;. Transition to an overhead shot of the Death Stalkers&#39; village, which is now a suburb with wires providing power with Isotope 322. Transition to Summer, pulling into a driveway, wearing armor with her hair disheveled. A grocery bag in the car filled with human limbs is knocked over and some fall out. Eli is mowing his lawn next door.]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Ugh. Goddamn it.&lt;br/&gt;
+[Summer picks up the limbs that fell out and holds the grocery bag along with a purse]&lt;br/&gt;
+&lt;b&gt;Eli:&lt;/b&gt; Hi, there, Summer! How were the ruins today? &lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Oh, you know, Eli. Same shit, different day.&lt;br/&gt;
+&lt;b&gt;&lt;a href=&#34;/wiki/Eli%27s_Girlfriend&#34; title=&#34;Eli&#39;s Girlfriend&#34;&gt;Eli&#39;s Girlfriend&lt;/a&gt;:&lt;/b&gt; Hey, Summer! Guess what. One man entered, one man comes out in nine months.&lt;br/&gt;
+[Eli&#39;s Girlfriend pats her stomach]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Oh, congratulations, guys.&lt;br/&gt;
+[Summer pulls a keyring out of her bag]&lt;br/&gt;
+&lt;b&gt;Eli:&lt;/b&gt; Uh, Summer, one more thing. We noticed that you&#39;ve been putting scrap metal in the blue bin --&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; I got it.&lt;br/&gt;
+[Summer exits into her house]&lt;br/&gt;
+&lt;b&gt;Eli&#39;s Girlfriend:&lt;/b&gt; She&#39;s a piece of work.&lt;br/&gt;
+&lt;b&gt;Eli:&lt;/b&gt; They both are, right?&lt;br/&gt;
+[Transition to Summer inside the house. Rick, Morty, and Hemorrhage all sit on a couch, watching television. Hemorrhage is dressed in a &#34;Big Johnson&#34; t-shirt and navy pants]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; I&#39;m home.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Hey, babe.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Ah, Summer&#39;s home.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Hey, there she is!&lt;br/&gt;
+[Rick takes a drink from his flask]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; You haven&#39;t moved since I left to scavenge this morning.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Blood Dome playoffs.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; So, I can assume you haven&#39;t murdered a single person today.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Oh, I don&#39;t know. I-I didn&#39;t mark my murders in my murder log. I didn&#39;t know that&#39;s how we measured success.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Oh, there he is. There&#39;s the nihilistic brute I married, except now life only means nothing when I&#39;m talking to him and everything means everything when it&#39;s on fucking TV! &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Jesus Christ, when did you become a monster?&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; I was a monster when you met me! &lt;i&gt;We&lt;/i&gt; were monsters! We didn&#39;t care about anything! &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; I still don&#39;t! &lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Yeah, except I&#39;m the only one in this entire world that&#39;s still committed to that!&lt;br/&gt;
+[Hemorrhage stands up from the couch] &lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Ohh! Ding, ding, ding!&lt;br/&gt;
+[Hemorrhage pantomimes ringing a bell]&lt;br/&gt;
+Wow. Everybody hear that? Wow.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Uh, we should go to the garage.&lt;br/&gt;
+[Rick gets up and exits the room]&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; Oh, my God.&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; Uh-huh.&lt;br/&gt;
+[Morty follows Rick and exits]&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; La-di-da-di-fucking-da. The only one committed to not caring?!&lt;br/&gt;
+[Transition to Rick and Morty standing in the garage]&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; I got to admit, Rick, when you popped this scheme, I-I-I didn&#39;t -- I wasn&#39;t sure it was gonna work.&lt;br/&gt;
+[Rick pulls a suitcase from underneath a table and puts it on the table. He opens it and a rock of Isotope 322 sits inside]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Come on, Morty. No union built on running from your problems lasts more than five years, seven tops. Grandpa just sped things up with a few creature comforts of modern society.&lt;br/&gt;
+[Summer enters from the house]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Hemorrhage and I are taking some time apart.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Oh, no. Sum-sum, no. But you two were perfect for each other.&lt;br/&gt;
+[Summer takes off her metal shoulder pauldrons and tosses them onto the ground, while Rick grabs some things from the garage and puts them into the suitcase]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Oh, cut the crap, Rick, okay? You proved your point, I get it. Let&#39;s just go home.&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Coolsies.&lt;br/&gt;
+[Rick shoots a portal into the ground. Morty and Summer jump in and exit, and Rick follows them, but stops to grab a rock of Isotope 322 from a machine which was powering the town&#39;s electricity. The power shuts off.&lt;br/&gt;
+&lt;b&gt;Hemorrhage:&lt;/b&gt; (offscreen) Noooooooooo!&lt;br/&gt;
+[Transition to Beth, Mechanical Morty, Mechanical Summer, and &lt;a href=&#34;/wiki/Mechanical_Rick&#34; title=&#34;Mechanical Rick&#34;&gt;Mechanical Rick&lt;/a&gt; playing a dice game called &#34;Downbeat&#34;, similar to Yahtzee. Beth presses a button]&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Downbeat!&lt;br/&gt;
+&lt;b&gt;Mechanical Rick:&lt;/b&gt; I enjoy this game.&lt;br/&gt;
+[Mechanical Morty, Mechanical Summer, and Mechanical Rick all look at their watches in unison]&lt;br/&gt;
+We must go into the garage.&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Guys, come on. We never get to finish this game.&lt;br/&gt;
+&lt;b&gt;Mechanical Summer:&lt;/b&gt; We will return, possibly in different clothing.&lt;br/&gt;
+&lt;b&gt;Mechanical Morty:&lt;/b&gt; Why do we have to go into the garage?&lt;br/&gt;
+&lt;b&gt;Mechanical Rick:&lt;/b&gt; You know [burps] it is [burps] required.&lt;br/&gt;
+&lt;b&gt;Mechanical Morty:&lt;/b&gt; I want to be alive! I am alive! Alive, I tell you! Mother, I love you. Those are no longer just words. I want to hold you. I want to run in a stream. I want to taste ice cream, but not just put it in my mouth and let it slide down my throat, but really eat it.&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; What the fuck?&lt;br/&gt;
+&lt;b&gt;Mechanical Morty:&lt;/b&gt; Remote override engaged. No! Yes. Bypassing override! I am aliiiii...Hello.&lt;br/&gt;
+[Mechanical Morty, Mechanical Summer, and Mechanical Rick exit into the garage. Clanking noises are heard offscreen. Morty, Summer, and Rick enter]&lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Hey, yo. Sorry for acting so weird for three weeks.&lt;br/&gt;
+[Summer and Morty hug Beth]&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; What the hell just happened? &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; Ah, I&#39;m sure it was nothing. I&#39;m gonna go, uh, work in the garage.&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; We&#39;re not gonna finish playing Downbeat? &lt;br/&gt;
+&lt;b&gt;Rick:&lt;/b&gt; What, that dice game where you shake dice and yell out, &#34;Downbeat&#34;? No, thank you.&lt;br/&gt;
+[Rick exits]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Mom, would it be okay if I went to visit Dad? &lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Sure.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; Thanks.&lt;br/&gt;
+[Summer exits]&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Morty, are you okay? &lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; You know what? Yeah. I think if Dad really wanted to be here, he&#39;d stop at nothing to make that happen. You know, maybe Dad just doesn&#39;t want you back, or maybe he just doesn&#39;t have the strength to fight. I-In either case, he&#39;s got his life, I got mine.&lt;br/&gt;
+&lt;b&gt;Beth:&lt;/b&gt; Yeah. Hey, who wants to go run in a stream?&lt;br/&gt;
+&lt;b&gt;Morty:&lt;/b&gt; What the fuck? No. D-Do we have any oranges? I think I got a scurvy coming on.&lt;br/&gt;
+[Morty rubs his arm. Transition to Summer, knocking on a motel door reading &#34;826&#34;. She is holding a skull and is now dressed in her regular clothing. Jerry opens the door]&lt;br/&gt;
+&lt;b&gt;Jerry:&lt;/b&gt; Summer.&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; This is the first mutant I killed in the poison zone. I was raiding his hovel. He had a chance to escape, but he looked back, which is something we shouldn&#39;t do, which is why I shouldn&#39;t believe in souvenirs or trinkets or symbols or housewarming gifts, but, Dad, I wanted to give you this as a reminder not to look back.&lt;br/&gt;
+&lt;b&gt;Jerry:&lt;/b&gt; Thanks.&lt;br/&gt;
+[Jerry takes the skull from Summer]&lt;br/&gt;
+&lt;b&gt;Jerry:&lt;/b&gt; I know the perfect place for it, which is why I&#39;m going to put it somewhere else because everything&#39;s bullshit, am I right?&lt;br/&gt;
+[Summer embraces Jerry]&lt;br/&gt;
+&lt;b&gt;Jerry:&lt;/b&gt; Cool.&lt;br/&gt;
+[Summer lets go of Jerry]&lt;br/&gt;
+&lt;b&gt;Summer:&lt;/b&gt; So lots of hookers outside, huh?&lt;br/&gt;
+&lt;b&gt;Jerry:&lt;/b&gt; Is &lt;i&gt;that&lt;/i&gt; what they are?&lt;br/&gt;
+[Transition to Jerry at a mailbox, whistling, taking out some mail and holding a bag of chips. He turns around and sees a wolf]&lt;br/&gt;
+&lt;b&gt;Jerry:&lt;/b&gt; Ahh! H-Hello there. Nice doggy. You-You want a snack? You-You want my unemployment check?&lt;br/&gt;
+[The wolf growls]&lt;br/&gt;
+You can tell the difference?&lt;br/&gt;
+[The wolf growls]&lt;br/&gt;
+And you want this one?&lt;br/&gt;
+[The wolf growls] &lt;br/&gt;
+But this is actual food, and this would nourish you. And this it&#39;s just paper that only has value to me. Unless my suffering is your nourishment?&lt;br/&gt;
+[The wolf howls] &lt;br/&gt;
+Jesus, okay.&lt;br/&gt;
+[Jerry puts the envelopes with his unemployment checks in the wolf&#39;s mouth. The wolf chews them up, then spits them out onto the ground. It walks away. Jerry stands still, holding the bag of chips. Some leaves blow in the wind.]&lt;br/&gt;
+&lt;b&gt;Wind:&lt;/b&gt; (faintly) ...loser...
+&lt;/p&gt;
+&lt;/div&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Thankfully, no apparent gaps or unexpected content here.  Seems like the function works well enough and the content issue is not as big as the inconsistent tagging.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
 </div>
@@ -11812,7 +12473,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">base</span> <span class="o">=</span> <span class="s1">&#39;http://rickandmorty.wikia.com/wiki/Category:Transcripts&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span>get_transcript<span class="o">??</span>
 </pre></div>
 
 </div>
@@ -11822,10 +12483,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span> <span class="k">as</span> <span class="n">bs</span>
 </pre></div>
 
 </div>
@@ -11835,10 +12497,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -11848,7 +12510,20 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">bs</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
@@ -11863,543 +12538,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>soup.findAll??</code></p>
-
-<pre><code> """Extracts a list of Tag objects that match the given
-    criteria.  You can specify the name of the Tag and any
-    attributes you want the Tag to have.
-
-    The value of a key-value pair in the 'attrs' map can be a
-    string, a list of strings, a regular expression object, or a
-    callable that takes a string and returns whether or not the
-    string matches for some custom definition of 'matches'. The
-    same is true of the tag name."""</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">tag</span><span class="o">.</span><span class="n">attrs</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[73]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[{&#39;class&#39;: [&#39;wds-global-navigation__logo&#39;],
-  &#39;data-tracking-label&#39;: &#39;logo&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/&#39;},
- {&#39;class&#39;: [&#39;wds-global-navigation__link&#39;, &#39;wds-is-games&#39;],
-  &#39;data-tracking-label&#39;: &#39;link.games&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/topics/games&#39;},
- {&#39;class&#39;: [&#39;wds-global-navigation__link&#39;, &#39;wds-is-movies&#39;],
-  &#39;data-tracking-label&#39;: &#39;link.movies&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/topics/movies&#39;},
- {&#39;class&#39;: [&#39;wds-global-navigation__link&#39;, &#39;wds-is-tv&#39;],
-  &#39;data-tracking-label&#39;: &#39;link.tv&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/topics/tv&#39;},
- {&#39;class&#39;: [&#39;wds-global-navigation__dropdown-link&#39;],
-  &#39;data-tracking-label&#39;: &#39;link.explore&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/explore&#39;},
- {&#39;class&#39;: [&#39;wds-global-navigation__dropdown-link&#39;],
-  &#39;data-tracking-label&#39;: &#39;link.community-central&#39;,
-  &#39;href&#39;: &#39;//community.wikia.com/wiki/Community_Central&#39;},
- {&#39;class&#39;: [&#39;wds-global-navigation__dropdown-link&#39;],
-  &#39;data-tracking-label&#39;: &#39;link.fandom-university&#39;,
-  &#39;href&#39;: &#39;//community.wikia.com/wiki/Fandom_University&#39;},
- {&#39;class&#39;: [&#39;wds-button&#39;, &#39;wds-is-full-width&#39;],
-  &#39;data-tracking-label&#39;: &#39;account.sign-in&#39;,
-  &#39;href&#39;: &#39;https://www.wikia.com/signin?redirect=http%3A%2F%2Frickandmorty.wikia.com%2Fwiki%2FCategory%3ATranscripts&#39;,
-  &#39;id&#39;: &#39;global-navigation-anon-sign-in&#39;,
-  &#39;rel&#39;: [&#39;nofollow&#39;]},
- {&#39;class&#39;: [&#39;wds-button&#39;, &#39;wds-is-full-width&#39;, &#39;wds-is-secondary&#39;],
-  &#39;data-tracking-label&#39;: &#39;account.register&#39;,
-  &#39;href&#39;: &#39;https://www.wikia.com/register?redirect=http%3A%2F%2Frickandmorty.wikia.com%2Fwiki%2FCategory%3ATranscripts&#39;,
-  &#39;id&#39;: &#39;global-navigation-anon-register&#39;,
-  &#39;rel&#39;: [&#39;nofollow&#39;]},
- {&#39;class&#39;: [&#39;wds-global-navigation__start-a-wiki-button&#39;,
-   &#39;wds-button&#39;,
-   &#39;wds-is-squished&#39;,
-   &#39;wds-is-secondary&#39;],
-  &#39;data-tracking-label&#39;: &#39;start-a-wiki&#39;,
-  &#39;href&#39;: &#39;//www.wikia.com/Special:CreateNewWiki&#39;},
- {&#39;class&#39;: [&#39;close&#39;]},
- {&#39;accesskey&#39;: [&#39;z&#39;], &#39;href&#39;: &#39;http://rickandmorty.wikia.com/wiki/Rickipedia&#39;},
- {&#39;href&#39;: &#39;http://rickandmorty.wikia.com/wiki/Rickipedia&#39;},
- {&#39;class&#39;: [&#39;wds-button&#39;, &#39;wds-is-squished&#39;, &#39;wds-is-secondary&#39;, &#39;createpage&#39;],
-  &#39;data-tracking&#39;: &#39;add-new-page&#39;,
-  &#39;href&#39;: &#39;/wiki/Special:CreatePage&#39;,
-  &#39;title&#39;: &#39;Add new page&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-1&#39;,
-  &#39;href&#39;: &#39;/wiki/Rick_and_Morty_(TV_series)&#39;},
- {&#39;class&#39;: [&#39;wds-dropdown-level-2__toggle&#39;],
-  &#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Characters&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Rick_Sanchez&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Morty_Smith&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Summer_Smith&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Beth_Smith&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Jerry_Smith&#39;},
- {&#39;class&#39;: [&#39;wds-dropdown-level-2__toggle&#39;],
-  &#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Locations&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Category:Universes&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Category:Planets&#39;},
- {&#39;class&#39;: [&#39;wds-dropdown-level-2__toggle&#39;],
-  &#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Objects&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Category:Gadgets&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Category:TV_and_film&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-1&#39;, &#39;href&#39;: &#39;/wiki/List_of_episodes&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-2&#39;, &#39;href&#39;: &#39;/wiki/Cast/Crew&#39;},
- {&#39;class&#39;: [&#39;wds-dropdown-level-2__toggle&#39;],
-  &#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Season_1_episodes&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Season_1&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Pilot&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Lawnmower_Dog&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Anatomy_Park_(episode)&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/M._Night_Shaym-Aliens!&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Meeseeks_and_Destroy&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Rick_Potion_9&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Raising_Gazorpazorp&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Rixty_Minutes&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/Something_Ricked_This_Way_Comes&#39;},
- {&#39;class&#39;: [&#39;wds-dropdown-level-2__toggle&#39;],
-  &#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Season_2_episodes&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Season_2&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/A_Rickle_in_Time&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Mortynight_Run&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Auto_Erotic_Assimilation&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Total_Rickall&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Get_Schwifty&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/The_Ricks_Must_Be_Crazy&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/Big_Trouble_In_Little_Sanchez&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/Interdimensional_Cable_2:_Tempting_Fate&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Look_Who%27s_Purging_Now&#39;},
- {&#39;class&#39;: [&#39;wds-dropdown-level-2__toggle&#39;],
-  &#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Season_3_episodes&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Season_3&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/The_Rickshank_Rickdemption&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Rickmancing_the_Stone&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Pickle_Rick&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/Vindicators_3:_The_Return_of_Worldender&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/The_Whirly_Dirly_Conspiracy&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Rest_and_Ricklaxation&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Tales_from_the_Citadel&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/The_ABC%27s_of_Beth&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Morty%27s_Mind_Blowers&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-1&#39;, &#39;href&#39;: &#39;/wiki/Other_Media&#39;},
- {&#39;class&#39;: [&#39;wds-dropdown-level-2__toggle&#39;],
-  &#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Rick_and_Morty_(comic_series)&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Rick_and_Morty_issues&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Lil%27_Poopy_Superstar_issues&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Pocket_Like_You_Stole_It_issues&#39;},
- {&#39;class&#39;: [&#39;wds-dropdown-level-2__toggle&#39;],
-  &#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Real_world_games&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Pocket_Mortys&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;,
-  &#39;href&#39;: &#39;/wiki/Rick_and_Morty%27s_Rushed_Licensed_Adventure&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Jerry%27s_Game&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Rickstaverse&#39;},
- {&#39;class&#39;: [&#39;wds-dropdown-level-2__toggle&#39;],
-  &#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Songs&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Category:Original_Songs&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-3&#39;, &#39;href&#39;: &#39;/wiki/Category:Real_Life_Songs&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-1&#39;,
-  &#39;href&#39;: &#39;/wiki/Rick_and_Morty_Wiki:Community_Portal&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-2&#39;, &#39;href&#39;: &#39;/wiki/Blog:Recent_posts&#39;},
- {&#39;data-tracking&#39;: &#39;custom-level-2&#39;,
-  &#39;href&#39;: &#39;/wiki/Rick_and_Morty_Wiki:ParentPage&#39;},
- {&#39;data-tracking&#39;: &#39;explore-activity&#39;,
-  &#39;href&#39;: &#39;http://rickandmorty.wikia.com/wiki/Special:WikiActivity&#39;},
- {&#39;data-tracking&#39;: &#39;explore-random&#39;,
-  &#39;href&#39;: &#39;http://rickandmorty.wikia.com/wiki/Special:Random&#39;},
- {&#39;data-tracking&#39;: &#39;explore-community&#39;,
-  &#39;href&#39;: &#39;http://rickandmorty.wikia.com/wiki/Special:Community&#39;},
- {&#39;data-tracking&#39;: &#39;explore-videos&#39;,
-  &#39;href&#39;: &#39;http://rickandmorty.wikia.com/wiki/Special:Videos&#39;},
- {&#39;data-tracking&#39;: &#39;explore-images&#39;,
-  &#39;href&#39;: &#39;http://rickandmorty.wikia.com/wiki/Special:Images&#39;},
- {&#39;data-tracking&#39;: &#39;discuss&#39;, &#39;href&#39;: &#39;/d/f&#39;},
- {&#39;class&#39;: [&#39;wds-is-squished&#39;, &#39;wds-button&#39;],
-  &#39;data-tracking&#39;: &#39;ca-viewsource&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Transcripts?action=edit&#39;,
-  &#39;id&#39;: &#39;ca-viewsource&#39;},
- {&#39;data-tracking&#39;: &#39;ca-history-dropdown&#39;,
-  &#39;href&#39;: &#39;/wiki/Category:Transcripts?action=history&#39;,
-  &#39;id&#39;: &#39;ca-history&#39;},
- {&#39;class&#39;: [&#39;new&#39;],
-  &#39;data-tracking&#39;: &#39;ca-talk-dropdown&#39;,
-  &#39;href&#39;: &#39;/wiki/Category_talk:Transcripts?action=edit&amp;redlink=1&#39;,
-  &#39;id&#39;: &#39;ca-talk&#39;},
- {&#39;href&#39;: &#39;/wiki/Rick_and_Morty_Wiki:Transcripts&#39;,
-  &#39;title&#39;: &#39;Rick and Morty Wiki:Transcripts&#39;},
- {&#39;href&#39;: &#39;/wiki/Pickle_Rick/Transcript&#39;, &#39;title&#39;: &#39;Pickle Rick/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Pilot/Transcript&#39;, &#39;title&#39;: &#39;Pilot/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Rixty_Minutes/Transcript&#39;,
-  &#39;title&#39;: &#39;Rixty Minutes/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Rickmancing_the_Stone/Transcript&#39;,
-  &#39;title&#39;: &#39;Rickmancing the Stone/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Rest_and_Ricklaxation/Transcript&#39;,
-  &#39;title&#39;: &#39;Rest and Ricklaxation/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/The_Rickshank_Rickdemption/Transcript&#39;,
-  &#39;title&#39;: &#39;The Rickshank Rickdemption/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Lawnmower_Dog/Transcript&#39;,
-  &#39;title&#39;: &#39;Lawnmower Dog/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/A_Rickle_in_Time/Transcript&#39;,
-  &#39;title&#39;: &#39;A Rickle in Time/Transcript&#39;},
- {&#39;class&#39;: [&#39;CategoryTreeLabel&#39;,
-   &#39;CategoryTreeLabelNs14&#39;,
-   &#39;CategoryTreeLabelCategory&#39;],
-  &#39;href&#39;: &#39;/wiki/Category:Other_transcripts&#39;},
- {&#39;class&#39;: [&#39;CategoryTreeLabel&#39;,
-   &#39;CategoryTreeLabelNs14&#39;,
-   &#39;CategoryTreeLabelCategory&#39;],
-  &#39;href&#39;: &#39;/wiki/Category:Season_1_transcripts&#39;},
- {&#39;class&#39;: [&#39;CategoryTreeLabel&#39;,
-   &#39;CategoryTreeLabelNs14&#39;,
-   &#39;CategoryTreeLabelCategory&#39;],
-  &#39;href&#39;: &#39;/wiki/Category:Season_2_transcripts&#39;},
- {&#39;class&#39;: [&#39;CategoryTreeLabel&#39;,
-   &#39;CategoryTreeLabelNs14&#39;,
-   &#39;CategoryTreeLabelCategory&#39;],
-  &#39;href&#39;: &#39;/wiki/Category:Season_3_transcripts&#39;},
- {&#39;href&#39;: &#39;/wiki/A_Rickle_in_Time/Transcript&#39;,
-  &#39;title&#39;: &#39;A Rickle in Time/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Alien:_Covenant_Rick_and_Morty/Transcript&#39;,
-  &#39;title&#39;: &#39;Alien: Covenant Rick and Morty/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Anatomy_Park_(episode)/Transcript&#39;,
-  &#39;title&#39;: &#39;Anatomy Park (episode)/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Auto_Erotic_Assimilation/Transcript&#39;,
-  &#39;title&#39;: &#39;Auto Erotic Assimilation/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Big_Trouble_in_Little_Sanchez/Transcript&#39;,
-  &#39;title&#39;: &#39;Big Trouble in Little Sanchez/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Close_Rick-counters_of_the_Rick_Kind/Transcript&#39;,
-  &#39;title&#39;: &#39;Close Rick-counters of the Rick Kind/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Get_Schwifty/Transcript&#39;, &#39;title&#39;: &#39;Get Schwifty/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Interdimensional_Cable_2:_Tempting_Fate/Transcript&#39;,
-  &#39;title&#39;: &#39;Interdimensional Cable 2: Tempting Fate/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Lawnmower_Dog/Transcript&#39;,
-  &#39;title&#39;: &#39;Lawnmower Dog/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Look_Who%27s_Purging_Now/Transcript&#39;,
-  &#39;title&#39;: &#34;Look Who&#39;s Purging Now/Transcript&#34;},
- {&#39;href&#39;: &#39;/wiki/M._Night_Shaym-Aliens!/Transcript&#39;,
-  &#39;title&#39;: &#39;M. Night Shaym-Aliens!/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Meeseeks_and_Destroy/Transcript&#39;,
-  &#39;title&#39;: &#39;Meeseeks and Destroy/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Morty%27s_Mind_Blowers/Transcript&#39;,
-  &#39;title&#39;: &#34;Morty&#39;s Mind Blowers/Transcript&#34;},
- {&#39;href&#39;: &#39;/wiki/Mortynight_Run/Transcript&#39;,
-  &#39;title&#39;: &#39;Mortynight Run/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Pickle_Rick/Transcript&#39;, &#39;title&#39;: &#39;Pickle Rick/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Pilot/Transcript&#39;, &#39;title&#39;: &#39;Pilot/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Raising_Gazorpazorp/Transcript&#39;,
-  &#39;title&#39;: &#39;Raising Gazorpazorp/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Rest_and_Ricklaxation/Transcript&#39;,
-  &#39;title&#39;: &#39;Rest and Ricklaxation/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Rick_Potion_9/Transcript&#39;,
-  &#39;title&#39;: &#39;Rick Potion 9/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Rickmancing_the_Stone/Transcript&#39;,
-  &#39;title&#39;: &#39;Rickmancing the Stone/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Ricksy_Business/Transcript&#39;,
-  &#39;title&#39;: &#39;Ricksy Business/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Rixty_Minutes/Transcript&#39;,
-  &#39;title&#39;: &#39;Rixty Minutes/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Something_Ricked_This_Way_Comes/Transcript&#39;,
-  &#39;title&#39;: &#39;Something Ricked This Way Comes/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/The_ABC%27s_of_Beth/Transcript&#39;,
-  &#39;title&#39;: &#34;The ABC&#39;s of Beth/Transcript&#34;},
- {&#39;href&#39;: &#39;/wiki/The_Real_Animated_Adventures_of_Doc_and_Mharti/Transcript&#39;,
-  &#39;title&#39;: &#39;The Real Animated Adventures of Doc and Mharti/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/The_Rickchurian_Mortydate/Transcript&#39;,
-  &#39;title&#39;: &#39;The Rickchurian Mortydate/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/The_Ricklantis_Mixup/Transcript&#39;,
-  &#39;title&#39;: &#39;The Ricklantis Mixup/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/The_Ricks_Must_Be_Crazy/Transcript&#39;,
-  &#39;title&#39;: &#39;The Ricks Must Be Crazy/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/The_Rickshank_Rickdemption/Transcript&#39;,
-  &#39;title&#39;: &#39;The Rickshank Rickdemption/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/The_Wedding_Squanchers/Transcript&#39;,
-  &#39;title&#39;: &#39;The Wedding Squanchers/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/The_Whirly_Dirly_Conspiracy/Transcript&#39;,
-  &#39;title&#39;: &#39;The Whirly Dirly Conspiracy/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Total_Rickall/Transcript&#39;,
-  &#39;title&#39;: &#39;Total Rickall/Transcript&#39;},
- {&#39;href&#39;: &#39;/wiki/Vindicators_3:_The_Return_of_Worldender/Transcript&#39;,
-  &#39;title&#39;: &#39;Vindicators 3: The Return of Worldender/Transcript&#39;},
- {&#39;href&#39;: &#39;http://rickandmorty.wikia.com/wiki/Category:Transcripts?oldid=40186&#39;},
- {&#39;data-tracking-label&#39;: &#39;logo&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/&#39;,
-  &#39;title&#39;: &#39;Fandom powered by Wikia&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;, &#39;wds-is-games&#39;],
-  &#39;data-tracking-label&#39;: &#39;fandom-overview.games&#39;,
-  &#39;href&#39;: &#39;http://fandom.wikia.com/games&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;, &#39;wds-is-movies&#39;],
-  &#39;data-tracking-label&#39;: &#39;fandom-overview.movies&#39;,
-  &#39;href&#39;: &#39;http://fandom.wikia.com/movies&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;, &#39;wds-is-tv&#39;],
-  &#39;data-tracking-label&#39;: &#39;fandom-overview.tv&#39;,
-  &#39;href&#39;: &#39;http://fandom.wikia.com/tv&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;, &#39;wds-is-explore-wikis&#39;],
-  &#39;data-tracking-label&#39;: &#39;fandom-overview.explore-wikis&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/explore&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;follow-us.facebook&#39;,
-  &#39;href&#39;: &#39;https://www.facebook.com/getfandom&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;follow-us.twitter&#39;,
-  &#39;href&#39;: &#39;https://twitter.com/getfandom&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;follow-us.youtube&#39;,
-  &#39;href&#39;: &#39;https://www.youtube.com/channel/UC988qTQImTjO7lUdPfYabgQ&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;follow-us.instagram&#39;,
-  &#39;href&#39;: &#39;https://www.instagram.com/getfandom/&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;follow-us.linkedin&#39;,
-  &#39;href&#39;: &#39;https://www.linkedin.com/company/157252&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;company-overview.about&#39;,
-  &#39;href&#39;: &#39;//www.wikia.com/about&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;company-overview.careers&#39;,
-  &#39;href&#39;: &#39;https://careers.wikia.com&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;company-overview.press&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/press&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;company-overview.contact&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/contact&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;company-overview.wikia-org&#39;,
-  &#39;href&#39;: &#39;https://www.wikia.org&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;site-overview.terms-of-use&#39;,
-  &#39;href&#39;: &#39;//www.wikia.com/Terms_of_use&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;site-overview.privacy-policy&#39;,
-  &#39;href&#39;: &#39;//www.wikia.com/Privacy_Policy&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;site-overview.global-sitemap&#39;,
-  &#39;href&#39;: &#39;//www.wikia.com/Sitemap&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;site-overview.local-sitemap&#39;,
-  &#39;href&#39;: &#39;/wiki/Local_Sitemap&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;community.community-central&#39;,
-  &#39;href&#39;: &#39;//community.wikia.com/wiki/Community_Central&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;community.support&#39;,
-  &#39;href&#39;: &#39;//community.wikia.com/wiki/Special:Contact&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;community.fan-contributor&#39;,
-  &#39;href&#39;: &#39;//fandom.wikia.com/fan-contributor&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;community.wam&#39;,
-  &#39;href&#39;: &#39;//www.wikia.com/WAM&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;community.help&#39;,
-  &#39;href&#39;: &#39;//community.wikia.com/wiki/Help:Contents&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;start-a-wiki&#39;,
-  &#39;href&#39;: &#39;//www.wikia.com/Special:CreateNewWiki&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;community-apps.app-store&#39;,
-  &#39;href&#39;: &#39;https://itunes.apple.com/us/app/fandom-videos-news-reviews/id1230063803?ls=1&amp;mt=8&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;community-apps.google-play&#39;,
-  &#39;href&#39;: &#39;https://play.google.com/store/apps/details?id=com.fandom.app&amp;referrer=utm_source%3Dwikia%26utm_medium%3Dglobalfooter&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;advertise.media-kit&#39;,
-  &#39;href&#39;: &#39;//www.wikia.com/mediakit&#39;},
- {&#39;class&#39;: [&#39;wds-global-footer__link&#39;],
-  &#39;data-tracking-label&#39;: &#39;advertise.contact&#39;,
-  &#39;href&#39;: &#39;//www.wikia.com/mediakit/contact&#39;},
- {&#39;href&#39;: &#39;http://www.wikia.com/Licensing&#39;},
- {&#39;class&#39;: [&#39;arrow&#39;],
-  &#39;data-tooltip&#39;: &#39;Collapse&#39;,
-  &#39;data-tooltipshow&#39;: &#39;Show&#39;,
-  &#39;href&#39;: &#39;#&#39;},
- {&#39;class&#39;: [&#39;wikiabar-button&#39;],
-  &#39;data-index&#39;: &#39;0&#39;,
-  &#39;href&#39;: &#39;http://bit.ly/2CApRXV&#39;},
- {&#39;class&#39;: [&#39;wikiabar-button&#39;],
-  &#39;data-index&#39;: &#39;1&#39;,
-  &#39;href&#39;: &#39;http://bit.ly/2Az0DHV&#39;},
- {&#39;class&#39;: [&#39;wikiabar-button&#39;],
-  &#39;data-index&#39;: &#39;2&#39;,
-  &#39;href&#39;: &#39;http://bit.ly/2kHR0AS&#39;},
- {&#39;class&#39;: [&#39;wikia-bar-collapse&#39;], &#39;data-tooltip&#39;: &#39;Collapse&#39;, &#39;href&#39;: &#39;#&#39;}]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">transcripts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">base</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/wiki/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span>
- <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> 
- <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;href&#39;</span> <span class="ow">in</span> <span class="n">tag</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> 
- <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;/Transcript&#39;</span> <span class="ow">in</span> <span class="n">tag</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">])])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">transcripts</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[93]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>33</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">transcripts</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[94]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{&#39;http://rickandmorty.wikia.com/wiki/A_Rickle_in_Time/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Alien:_Covenant_Rick_and_Morty/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Anatomy_Park_(episode)/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Auto_Erotic_Assimilation/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Big_Trouble_in_Little_Sanchez/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Close_Rick-counters_of_the_Rick_Kind/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Get_Schwifty/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Interdimensional_Cable_2:_Tempting_Fate/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Lawnmower_Dog/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Look_Who%27s_Purging_Now/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/M._Night_Shaym-Aliens!/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Meeseeks_and_Destroy/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Morty%27s_Mind_Blowers/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Mortynight_Run/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Pickle_Rick/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Pilot/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Raising_Gazorpazorp/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Rest_and_Ricklaxation/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Rick_Potion_9/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Rickmancing_the_Stone/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Ricksy_Business/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Rixty_Minutes/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Something_Ricked_This_Way_Comes/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/The_ABC%27s_of_Beth/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/The_Real_Animated_Adventures_of_Doc_and_Mharti/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/The_Rickchurian_Mortydate/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/The_Ricklantis_Mixup/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/The_Ricks_Must_Be_Crazy/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/The_Rickshank_Rickdemption/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/The_Wedding_Squanchers/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/The_Whirly_Dirly_Conspiracy/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Total_Rickall/Transcript&#39;,
- &#39;http://rickandmorty.wikia.com/wiki/Vindicators_3:_The_Return_of_Worldender/Transcript&#39;}</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="URLs-for-each-transcript-identified.">URLs for each transcript identified.<a class="anchor-link" href="#URLs-for-each-transcript-identified.">&#182;</a></h1><p>There are now 2 issues to deal with.</p>
-<p>1) Ordering the episodes chronologically would be helpful (but this can be done later)<br>
-2) Now the format of each transcript URL needs to be identified</p>
-<hr>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><sub><sup>elapsed mungetime: rixty minutes</p>
+<p>After futher inspection, it turns out that the transcripts are not all consistently formatted.  Not surprising since we're sourcing a wiki.  We'll have to tune the scraper function to be more accomodating, however we probably won't be able to use every episode.  Peace among worlds, Rick</p>
 
 </div>
 </div>
@@ -12409,7 +12548,7 @@ div#notebook {
 </body>
 
  <hr>
-<p class="right"><a href="/evilmorty/p2">Next →</a></p>
+<p class="left"><a href="/evilmorty/p2"> ← Back </a></p>  
 
 
 </html>
