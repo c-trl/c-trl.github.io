@@ -152,7 +152,7 @@ img.hold{
 	text-align: center;
 	font-size: 50px;
 	color: #999999;
-	height: 2em
+	/* height: 2em */
 }
 .main {
 	width: 800px;
