@@ -1,0 +1,98 @@
+<!doctype html>
+<!-- ZRI Data -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>c-trl | Data Wrangling with Python</title>
+
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <link rel="shortcut icon" href="http://bobdawg.org/images/ico/Link_Vista.ico">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">  
+      <header>
+      
+      
+        <center><h2><a href="/home"><img src="http://i.imgur.com/9673XO4.png" class="home" height=120px width=120px></a></h2></center>
+        <hr>
+        <h2><a id="zillow" class="anchor" href="#zillow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working with the ZRI Data</h2>
+        <p><a href="/zillow">Section I: Analyzing Zillow Rent Index</a></p>
+        <p><a href="/zillow/p2">Section 2: Digging Deeper into NYC ZRI Data</a></p>
+
+      </header>
+      <section>
+
+<h2>How chaotic is rent in New York?</h2>
+<p class="content">Looking for a place to rent in New York shouldn't be like jumping into a dark hole.  Finding places on AirBnB to couch-hop shouldn't be a viable resort (although it seems I meet more and more people who look to do so).  Finding a place to rent should provide at least a few months of comfort in knowing you have a place to call home - but what should be considered before choosing a place to rent?</p>
+
+<p class="content">This isn't a guide to renting in the city, but more a project of data exploration and analysis, again using Zillow's ZRI data.  This time however, New York City is the focus, and the key exploration is higher-order derivatives.  Can higher-order derivatives be used in choosing a neighborhood to rent in New York City?</p>
+
+<!--INITIAL FINDINGS-->
+<p class="content">It turns out that a combination of first, second, and third-order derivatives may provide greater insight into trends in rent throughout different neighborhoods, and can help to make sense of chaotic changes in rent.  This study borrows from Physics' application of derivatives.  Here, velocity, acceleration, and jerk refer to first, second, and third-order derivatives, respectively.</p>
+
+This study utilizes averages in rent, velocity, acceleration, and jerk - measured in $/month, $/month, $/month<sup>2</sup>, and $/month<sup>3</sup>, respsectively.  This is what the four look like over time in the Upper West Side:<br>
+<!--rent-->
+<p class="content-image"><a href="http://i.imgur.com/BtVrltd.png target="_blank">-Rent in the Upper West Side-<br>
+<img class="content" src="http://i.imgur.com/BtVrltd.png" width=600px></a></p>
+
+<!--AZJ-->
+<p class="content-image"><a href="http://i.imgur.com/RVmD1WX.png target="_blank">-Velocity, Acceleration, Jerk of Rent in the Upper West Side-<br>
+<img class="content" src="http://i.imgur.com/RVmD1WX.png" width=600px></a></p>
+
+<p class="blogcaption">Velocity measured in $/month, acceleration in $/month<sup>2</sup>, and jerk in $/month<sup>3</sup></p>
+
+<p class="content">Here it's pretty evident that rent fluctuates frequently.  The higher-order derivatives seem chaotic, and frankly to the untrained eye - meaningless.  "Rent goes up and down.  Derivatives simply emphasize that."  That was my initial sentiment.  However, in physics, jerk refers to the change in acceleration, or the change in change in velocity - or the change in change in change in position.  I couldn't help but be convinced that a third-order derivative could provide at least some insight to trends in rent.</p>
+
+<p class="content">After some reading up, and grappling with the concept of a "change in change in change", I had gathered that average jerk can help to project property value in different areas.  Theoretically, a neighborhood that is on pace to increase in property value, or neighborhood value overall, is idenftified by a 0-jerk (low rent sensitivity), a close-to-zero acceleration (constant rate of change in rent), and a high velocity (constant increases in rent). All three of these indicators point to a growth trend in a neighborhood.  Essentially, jerk is indicative of sensitivty to external variables.  A neighborhood with a jerk of a small absolute value, or close-to-0, is a neighborhood that isn't easily affected by factors that more prominently affect rent in areas with greater average jerk.</p>
+
+<p class="content">For example, Little Italy has the highest average jerk in New York City.  A plotting of average rent in that neighborhood shows that rent seems to be quite chaotic.</p>
+
+<!---Little Italy Rent---->
+<p class="content-image"><a href="http://i.imgur.com/UfUHO6h.png="_blank">-Average Rent in Little Italy, NYC, $/month-<br>
+<img class="content" src="http://i.imgur.com/UfUHO6h.png" width=600px></a></p>
+
+<p class="content">In comparison, rent in a neighborhood where average jerk is 0, such as Park Slope, NYC, is seen to be quite consistent in trend.  Here, there are only 4 peaks and valleys, or maxima and minima in the average rent over time.  Little Italy, on the otherhand is riddled with local minima and maxima.</p>
+
+<!---Park Slope Rent---->
+<p class="content-image"><a href="http://i.imgur.com/afl90pL.png="_blank">-Average Rent in Park Slope, NYC, $/month-<br>
+<img class="content" src="http://i.imgur.com/afl90pL.png" width=600px></a></p>
+
+<p class="content">It seems that in areas with a smaller absolute jerk value can rent without having to anticipate changes in property value (and consequently, quality of the neighborhood on a higher level), as often as other areas.  
+</p>
+
+<p class="content">It's important to keep in mind however, that jerk is not necessarily indicative of rent itself.  A high average jerk could be applicable in low-rent and high-rent areas alike.  Jerk is simply indicative of rent sensitivity, and could allude to various factors; Is the area undergoing a serious fit of gentrification?  Is the neighborhood bringing in an unusual influx of small/medium businesses?  These questions are what should follow when considering rent in an area with high jerk.  On the other hand, an area where jerk is virtually 0 can either mean that rent has over time, consistently increased (indicative of high property value), or consistently remained within a particular range and has neither, on average, increased or decreased relative to other areas within the city.</p>
+
+<p class="content">It is for these reasons that all three derivatives should be considered when assessing an area's rent volatility.  
+</p>
+</p>
+
+
+<h3 align="center"><a href="http://nbviewer.ipython.org/github/c-trl/zillow-pt2/blob/master/zillow-nyc.ipynb" target="_blank">Follow the project in this IPython Notebook.</a></h3>
+<hr>
+<p class="left"><a href="/zillow"> ← Back </a></p>  
+
+      </section>
+      <footer>
+       
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-50124410-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
