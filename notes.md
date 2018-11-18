@@ -12,5 +12,4 @@ The one you feed."  - Jean-Claude Van Damme in Dragon Eyes
 
 “Great minds discuss ideas; Average minds discuss events; Small minds discuss people.” - Eleanor Roosevelt
 
-"The philosophers have only interpreted the world in various ways; the point however is to change it."
-- Karl Marx
+"The philosophers have only interpreted the world in various ways; the point however is to change it." - Karl Marx
