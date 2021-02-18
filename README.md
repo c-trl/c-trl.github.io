@@ -10,6 +10,13 @@
 
 Here's a body of text
 
+<details>
+  <summary>What about a nested drop-down?</summary>
+
+YES! THAT TOO!
+</details>
+
+
 1. Here's
 2. A
 3. Numbered
