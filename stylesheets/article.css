@@ -184,6 +184,41 @@ p.blogcaption {
   padding: 0;
 }
 
+/* ── Code ── */
+
+pre {
+  background: #161616;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  margin: 0 0 1.5em;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+code {
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+  color: #c8c8c8;
+}
+
+p code {
+  background: #1e1e1e;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+  margin: 0 0 1.25em;
+  color: #b8b8b8;
+}
+
+li {
+  margin-bottom: 0.4em;
+}
+
 /* ── Pagination ── */
 
 p.right {

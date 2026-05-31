@@ -1,74 +1,43 @@
 <!doctype html>
-<!-- EIA.gov API -->
 <html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>c-trl | Data Wrangling with Python</title>
-
-    <link rel="stylesheet" href="/stylesheets/styles.css">
-    <link rel="stylesheet" href="/stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    <link rel="shortcut icon" href="http://bobdawg.org/images/ico/Link_Vista.ico">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>c-trl | Sentiment Analysis: Xanga</title>
+    <link rel="stylesheet" href="/stylesheets/article.css">
   </head>
   <body>
-    <div class="wrapper">  
+    <div class="wrapper">
       <header>
-      
-      
-        <center><h2><a href="/home"><img src="http://i.imgur.com/9673XO4.png" class="home" height=120px width=120px></a></h2></center>
-        <hr>
-        <h2><a id="eia" class="anchor" href="#eia" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-        Remember Xanga?</h2>
+        <a href="/home"><img src="http://i.imgur.com/9673XO4.png" class="home" width="52" height="52" alt="home"></a>
+        <h2>Remember Xanga?</h2>
         <p><a href="/xanga">Section I: Time Travelling</a></p>
         <p><a href="/xanga/p2">Section II: NLP Descriptive Statistics</a></p>
-       
-
       </header>
-<section>
-<h2><b><i><font color=#cbcbcb>February 19, 2015</font></i></b></h2>
-<h2>Remember Xanga?</h2>
-<p class="content">No?  That's okay, you're probably better of for it.  I started my own Xanga page a very long time ago mostly to safely rant online.  As is, was, and ever will be any other kid my age then, I needed a way to figure things out, and blogging helped me do that.  I would have kept blogging too, if it wasn't for you meddling kids [at WordPress].</p>
 
-<p class="content-image"><a href="http://i.imgur.com/P8Bi3qU.png"><img class="content" src="http://i.imgur.com/P8Bi3qU.png"></a></p>
+      <section>
 
-<p class="content"></p>Actually, when Xanga died out (or in their words, released 2.0), WordPress preserved a lot of the content that, upon release of 2.0, became unavailable.  Still bitter about that, Xanga, that wasn't cool.  Anyway, that was also around the same time services like Twitter and Tumblr started coming up.  Extensive blogging was soon replaced by quick quips and image sharing.  What better way to convey a thousand words than with a picture?  Other than 1,001 words, that is.</p>
+        <p class="date">February 19, 2015</p>
 
-<p class="content">Enter the present-day.  Good guy WordPress remains preserving everyone's old Xanga content, but in archived form.  I wanted a way to take back my content and muck about in in it, wallowing in nostalgic mania.  What better way to do that than with Python!</p>
+        <h2>Remember Xanga?</h2>
 
-<center><blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="4" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:8px;"> <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:50% 0; text-align:center; width:100%;"> <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAAGFBMVEUiIiI9PT0eHh4gIB4hIBkcHBwcHBwcHBydr+JQAAAACHRSTlMABA4YHyQsM5jtaMwAAADfSURBVDjL7ZVBEgMhCAQBAf//42xcNbpAqakcM0ftUmFAAIBE81IqBJdS3lS6zs3bIpB9WED3YYXFPmHRfT8sgyrCP1x8uEUxLMzNWElFOYCV6mHWWwMzdPEKHlhLw7NWJqkHc4uIZphavDzA2JPzUDsBZziNae2S6owH8xPmX8G7zzgKEOPUoYHvGz1TBCxMkd3kwNVbU0gKHkx+iZILf77IofhrY1nYFnB/lQPb79drWOyJVa/DAvg9B/rLB4cC+Nqgdz/TvBbBnr6GBReqn/nRmDgaQEej7WhonozjF+Y2I/fZou/qAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div></div> <p style=" margin:8px 0 0 0; padding:0 4px;"> <a href="https://instagram.com/p/yBGEBSkQr-/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_top">Guys @generalassembly #datascience it finally happened. I just want my old Xanga entries!</a></p> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">A photo posted by Christian Tirol (@christiantirol) on <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2015-01-19T01:28:57+00:00">Jan 18, 2015 at 5:28pm PST</time></p></div></blockquote>
-<script async defer src="//platform.instagram.com/en_US/embeds.js"></script></center>
+        <p class="content">No? That's okay, you're probably better off for it. I started my own Xanga page a very long time ago mostly to safely rant online. As is, was, and ever will be any other kid my age then, I needed a way to figure things out, and blogging helped me do that. I would have kept blogging too, if it wasn't for you meddling kids at WordPress.</p>
 
+        <p class="content-image"><a href="http://i.imgur.com/P8Bi3qU.png"><img class="content" src="http://i.imgur.com/P8Bi3qU.png" alt="Xanga screenshot"></a></p>
 
-<p class="content">Oops.</p>
+        <p class="content">Actually, when Xanga died out (or in their words, released 2.0), WordPress preserved a lot of the content that, upon release of 2.0, became unavailable. Still bitter about that, Xanga — that wasn't cool. Anyway, that was also around the same time services like Twitter and Tumblr started coming up. Extensive blogging was soon replaced by quick quips and image sharing. What better way to convey a thousand words than with a picture? Other than 1,001 words, that is.</p>
 
-<h2>What better way to do that than with Python!</h2>
+        <p class="content">Enter the present-day. Good guy WordPress remains preserving everyone's old Xanga content, but in archived form. I wanted a way to take back my content and muck about in it, wallowing in nostalgic mania. What better way to do that than with Python!</p>
 
-<p class="content">I tried a few ways to get to the heart of my old content.  In retrospect, downloading the archived XML files might have been easier, but in all honestly, not nearly as fun.  I managed to pull in each page of my blog from WordPress using requests with Python.  I also tried urllib3, but requests seemed faster and far simpler.  After each page was pulled in, I converted the text to ASCII, although this step ended up being redundant once I got to using BeautifulSoup, which takes care of most - if not all - of text filtering and HTML parsing.  After going back to trim off the head and footer sections of each page and consolidating all the content into one string entity, I got to breaking out the NLTK (Natural Language Tool Kit).</p>
+        <h2>What better way to do that than with Python!</h2>
 
-<hr>
-<p class="right"><a href="/xanga/p2">Next →</a></p>
+        <p class="content">I tried a few ways to get to the heart of my old content. In retrospect, downloading the archived XML files might have been easier, but in all honesty, not nearly as fun. I managed to pull in each page of my blog from WordPress using <code>requests</code> with Python. I also tried <code>urllib3</code>, but requests seemed faster and far simpler. After each page was pulled in, I converted the text to ASCII, although this step ended up being redundant once I got to using BeautifulSoup, which takes care of most — if not all — of text filtering and HTML parsing. After going back to trim off the head and footer sections of each page and consolidating all the content into one string entity, I got to breaking out the NLTK (Natural Language Tool Kit).</p>
+
+        <hr>
+        <p class="right"><a href="/xanga/p2">Next →</a></p>
 
       </section>
-      <footer>
-       
-      </footer>
+      <footer></footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-50124410-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
   </body>
 </html>
-
