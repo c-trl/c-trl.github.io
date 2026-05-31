@@ -1,43 +1,28 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>c-trl | Sentiment Analysis: Xanga</title>
-    <link rel="stylesheet" href="/stylesheets/article.css">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <a href="/home"><img src="http://i.imgur.com/9673XO4.png" class="home" width="52" height="52" alt="home"></a>
-        <h2>Remember Xanga?</h2>
-        <p><a href="/xanga">Section I: Time Travelling</a></p>
-        <p><a href="/xanga/p2">Section II: NLP Descriptive Statistics</a></p>
-      </header>
+---
+layout: article
+title: "Sentiment Analysis: Xanga"
+series: "Remember Xanga?"
+sections:
+  - label: "Section I: Time Travelling"
+    url: "/xanga"
+  - label: "Section II: NLP Descriptive Statistics"
+    url: "/xanga/p2"
+---
+<p class="date">February 19, 2015</p>
 
-      <section>
+<h2>Remember Xanga?</h2>
 
-        <p class="date">February 19, 2015</p>
+<p class="content">No? That's okay, you're probably better off for it. I started my own Xanga page a very long time ago mostly to safely rant online. As is, was, and ever will be any other kid my age then, I needed a way to figure things out, and blogging helped me do that. I would have kept blogging too, if it wasn't for you meddling kids at WordPress.</p>
 
-        <h2>Remember Xanga?</h2>
+<p class="content-image"><a href="http://i.imgur.com/P8Bi3qU.png"><img class="content" src="http://i.imgur.com/P8Bi3qU.png" alt="Xanga screenshot"></a></p>
 
-        <p class="content">No? That's okay, you're probably better off for it. I started my own Xanga page a very long time ago mostly to safely rant online. As is, was, and ever will be any other kid my age then, I needed a way to figure things out, and blogging helped me do that. I would have kept blogging too, if it wasn't for you meddling kids at WordPress.</p>
+<p class="content">Actually, when Xanga died out (or in their words, released 2.0), WordPress preserved a lot of the content that, upon release of 2.0, became unavailable. Still bitter about that, Xanga — that wasn't cool. Anyway, that was also around the same time services like Twitter and Tumblr started coming up. Extensive blogging was soon replaced by quick quips and image sharing. What better way to convey a thousand words than with a picture? Other than 1,001 words, that is.</p>
 
-        <p class="content-image"><a href="http://i.imgur.com/P8Bi3qU.png"><img class="content" src="http://i.imgur.com/P8Bi3qU.png" alt="Xanga screenshot"></a></p>
+<p class="content">Enter the present-day. Good guy WordPress remains preserving everyone's old Xanga content, but in archived form. I wanted a way to take back my content and muck about in it, wallowing in nostalgic mania. What better way to do that than with Python!</p>
 
-        <p class="content">Actually, when Xanga died out (or in their words, released 2.0), WordPress preserved a lot of the content that, upon release of 2.0, became unavailable. Still bitter about that, Xanga — that wasn't cool. Anyway, that was also around the same time services like Twitter and Tumblr started coming up. Extensive blogging was soon replaced by quick quips and image sharing. What better way to convey a thousand words than with a picture? Other than 1,001 words, that is.</p>
+<h2>What better way to do that than with Python!</h2>
 
-        <p class="content">Enter the present-day. Good guy WordPress remains preserving everyone's old Xanga content, but in archived form. I wanted a way to take back my content and muck about in it, wallowing in nostalgic mania. What better way to do that than with Python!</p>
+<p class="content">I tried a few ways to get to the heart of my old content. In retrospect, downloading the archived XML files might have been easier, but in all honesty, not nearly as fun. I managed to pull in each page of my blog from WordPress using <code>requests</code> with Python. I also tried <code>urllib3</code>, but requests seemed faster and far simpler. After each page was pulled in, I converted the text to ASCII, although this step ended up being redundant once I got to using BeautifulSoup, which takes care of most — if not all — of text filtering and HTML parsing. After going back to trim off the head and footer sections of each page and consolidating all the content into one string entity, I got to breaking out the NLTK (Natural Language Tool Kit).</p>
 
-        <h2>What better way to do that than with Python!</h2>
-
-        <p class="content">I tried a few ways to get to the heart of my old content. In retrospect, downloading the archived XML files might have been easier, but in all honesty, not nearly as fun. I managed to pull in each page of my blog from WordPress using <code>requests</code> with Python. I also tried <code>urllib3</code>, but requests seemed faster and far simpler. After each page was pulled in, I converted the text to ASCII, although this step ended up being redundant once I got to using BeautifulSoup, which takes care of most — if not all — of text filtering and HTML parsing. After going back to trim off the head and footer sections of each page and consolidating all the content into one string entity, I got to breaking out the NLTK (Natural Language Tool Kit).</p>
-
-        <hr>
-        <p class="right"><a href="/xanga/p2">Next →</a></p>
-
-      </section>
-      <footer></footer>
-    </div>
-  </body>
-</html>
+<hr>
+<p class="right"><a href="/xanga/p2">Next →</a></p>

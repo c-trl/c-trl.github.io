@@ -1,50 +1,19 @@
-<!DOCTYPE html>
-<head>
-  <title>c-trl | Home</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta content="http://christiantirol.com/" property="og:url">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/homestyles.css">
-</head>
-
-<body>
-
-<div class="homeheader">
-  <a href="/about"><img src="http://i.imgur.com/9673XO4.png" class="home" id="about" width="96" height="96" alt="avatar"></a>
-  <h1>christian.tirol</h1>
+---
+layout: home
+title: c-trl | Home
+---
+<div onclick="location.href='/zillow';" class="main" id="zillow">
+  <p class="caption"><a class="main" href="/zillow">Exploring the Zillow Rent Index and Rental Property Value Trends with Python</a></p>
 </div>
 
-<div class="container">
-  <hr>
-
-  <div onclick="location.href='/zillow';" class="main" id="zillow">
-    <p class="caption"><a class="main" href="/zillow">Exploring the Zillow Rent Index and Rental Property Value Trends with Python</a></p>
-  </div>
-
-  <div onclick="location.href='/avatar';" class="main" id="avatar">
-    <p class="caption"><a class="main" href="/avatar">Sentiment Analysis Part 2: A Serious Discussion About a Nickelodeon Cartoon</a></p>
-  </div>
-
-  <div onclick="location.href='/xanga';" class="main" id="xanga">
-    <p class="caption"><a class="main" href="/xanga">Sentiment Analysis Part 1: Xanga Blog Entries from 2005</a></p>
-  </div>
-
-  <div onclick="location.href='/energy';" class="main" id="energy">
-    <p class="caption"><a class="main" href="/energy">Working with Energy Information Administration Data and API</a></p>
-  </div>
-
+<div onclick="location.href='/avatar';" class="main" id="avatar">
+  <p class="caption"><a class="main" href="/avatar">Sentiment Analysis Part 2: A Serious Discussion About a Nickelodeon Cartoon</a></p>
 </div>
 
-<div class="feet">
-  <hr>
-  <a href="https://github.com/c-trl" target="_blank" class="feet-link">🐙</a>
-  <a href="mailto:tirol.christian+ctrl@gmail.com" target="_blank" class="feet-link">✉️</a>
-  <a href="http://www.linkedin.com/in/christiantirol" target="_blank" class="feet-link">💼</a>
+<div onclick="location.href='/xanga';" class="main" id="xanga">
+  <p class="caption"><a class="main" href="/xanga">Sentiment Analysis Part 1: Xanga Blog Entries from 2005</a></p>
 </div>
 
-</body>
-</html>
+<div onclick="location.href='/energy';" class="main" id="energy">
+  <p class="caption"><a class="main" href="/energy">Working with Energy Information Administration Data and API</a></p>
+</div>

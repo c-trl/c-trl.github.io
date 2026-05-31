@@ -1,212 +1,110 @@
-<!doctype html>
-<!-- EIA.gov API -->
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>c-trl | Data Wrangling with Python</title>
+---
+layout: article
+title: "Working with the EIA API"
+series: "Working with the EIA.gov API"
+sections:
+  - label: "Section I: Introduction, Configuration and Setup"
+    url: "/energy"
+  - label: "Section II: Aggregating EIA Data with Python"
+    url: "/energy/p2"
+  - label: "Section III: Cleaning, Visualization with Pandas, Matplotlib"
+    url: "/energy/p3"
+  - label: "Section IV: Understanding SVG Files with BeautifulSoup"
+    url: "/energy/p4"
+  - label: "Section V: Geoplotting State-Level US Data to Create Heatmaps"
+    url: "/energy/p5"
+---
+<h2>Collecting Data on Energy</h2>
 
-    <link rel="stylesheet" href="/stylesheets/styles.css">
-    <link rel="stylesheet" href="/stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    <link rel="shortcut icon" href="http://bobdawg.org/images/ico/Link_Vista.ico">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-      
-      
-        <center><h1><a href="/home"><img src="http://i.imgur.com/9673XO4.png" class="home" height=120px width=120px></a></h1></center>
-        <hr>
-        <h3><a id="eia" class="anchor" href="#eia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working with the EIA.gov API</h3>
-        <p><a href="/energy">Section I: Introduction, Configuration and Setup</a></p>
-        <p><a href="/energy/p2">Section II: Aggregating EIA Data with Python</a></p>
-        <p><a href="/energy/p3">Section III: Cleaning, Visualization with Pandas, Matplotlib</a></p>
-        <p><a href="/energy/p4">Section IV: Understanding SVG Files with BeautifulSoup</a></p>
-        <p><a href="/energy/p5">Section V: Geoplotting State-Level US Data to Create Heatmaps</a></p>
+<p class="content">The EIA website hosts quite a large range of data on energy and the energy industry. From the start, I knew I wanted to find state-level data on renewable energy production and data on residential electricity. However, out of curiosity I created a short code snippet that utilizes the API's keyword search call. The call simply returns metadata on all series of data that are relevant to a provided keyword. Using <code>requests.get()</code> and <code>.text</code> to return the text of the data, what is returned is JSON data in string format. This can easily be converted into JSON format with <code>json.loads()</code>. Once in JSON format, data can be accessed by indexing your way down the response's element tree.</p>
 
-      </header>
-      <section>
-        <h3>
-<a id="eia" class="anchor" href="#eia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Collecting Data on Energy</h3>
+<p class="content">Using <code>search_keywords()</code> returns the names of all relevant series, along with their corresponding series IDs. These IDs are used to compile specific data.</p>
 
-<p>The EIA website hosts quite a large range of data on energy and the energy industry.  From the start, I knew I wanted to find state-level data on renewable energy production and data on residential electricity.  However, out of curiousity I created a short codebit that utilizes the API's keyword search call.  The call simply returns metadata on all series of data that are relevant to a provided keyword.  Using requests.get() and .text to return the text of the data, what is returned is JSON data in string format.  This can easily be converted into JSON format with json.loads.  Once in JSON format, data can be accessed a la indexing your way down the response's element tree, the same way you would access elements of a list or a dictionary.</p>
+<pre><code>searches = {}
 
-<p>Using search_keywords() returns the names of all relevant series, along with their corresponding series IDs.  These IDs are used to compile specific data.</p>
+def search_keywords():
+    query = raw_input('Search for Keyword: ')
+    if query == 'x' or query == 'q':
+        pass
+    else:
+        base_url = 'http://api.eia.gov/search/?search_term=name&search_value="{}"&rows_per_page={}'
+        r = requests.get(base_url.format(query, '10000'))
+        master_dict = json.loads(r.text)
+        docs = master_dict['response']['docs']
+        print('Search Results Found:')
+        for series in docs:
+            print {series['name']: series['series_id']}</code></pre>
 
-
-<!-- search_keywords() -->
-
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">searches <span style="color: #666666">=</span> {}
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">search_keywords</span>():
-    query <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Search for Keyword: &#39;</span>)
-    <span style="color: #008000; font-weight: bold">if</span> query <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;x&#39;</span> <span style="color: #AA22FF; font-weight: bold">or</span> query <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;q&#39;</span>:
-        <span style="color: #008000; font-weight: bold">pass</span>
-    <span style="color: #008000; font-weight: bold">else</span>:
-        base_url <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;http://api.eia.gov/search/?search_term=name&amp;search_value=&quot;{}&quot;&amp;rows_per_page={}&#39;</span>
-        r <span style="color: #666666">=</span> requests<span style="color: #666666">.</span>get(base_url<span style="color: #666666">.</span>format(query, <span style="color: #BA2121">&#39;10000&#39;</span>))
-        text <span style="color: #666666">=</span> r<span style="color: #666666">.</span>text
-        master_dict <span style="color: #666666">=</span> json<span style="color: #666666">.</span>loads(text)
-        m <span style="color: #666666">=</span> master_dict
-        data <span style="color: #666666">=</span> m[<span style="color: #BA2121">&#39;response&#39;</span>]
-        docs <span style="color: #666666">=</span> data[<span style="color: #BA2121">&#39;docs&#39;</span>]
-        <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Search Results Found:&#39;</span>)
-        <span style="color: #008000; font-weight: bold">for</span> series <span style="color: #AA22FF; font-weight: bold">in</span> docs:
-            <span style="color: #008000; font-weight: bold">print</span> {series[<span style="color: #BA2121">&#39;name&#39;</span>]:series[<span style="color: #BA2121">&#39;series_id&#39;</span>]}
-</pre></div>
-
-<br>
-
-<!-- search results -->
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">Search for Keyword: renewable energy
+<pre><code>Search for Keyword: renewable energy
 Search Results Found:
-{u&#39;Renewable energy production, Iowa&#39;: u&#39;SEDS.REPRB.IA.A&#39;}
-{u&#39;Renewable energy production, Ohio&#39;: u&#39;SEDS.REPRB.OH.A&#39;}
-{u&#39;Renewable energy production, Utah&#39;: u&#39;SEDS.REPRB.UT.A&#39;}
-{u&#39;Renewable energy production, Idaho&#39;: u&#39;SEDS.REPRB.ID.A&#39;}
-{u&#39;Renewable energy production, Maine&#39;: u&#39;SEDS.REPRB.ME.A&#39;}
-</pre></div>
+{'Renewable energy production, Iowa': 'SEDS.REPRB.IA.A'}
+{'Renewable energy production, Ohio': 'SEDS.REPRB.OH.A'}
+{'Renewable energy production, Utah': 'SEDS.REPRB.UT.A'}
+{'Renewable energy production, Idaho': 'SEDS.REPRB.ID.A'}
+{'Renewable energy production, Maine': 'SEDS.REPRB.ME.A'}</code></pre>
 
-<br>
+<pre><code>def search_series(query, save_as):
+    base_url = 'http://api.eia.gov/search/?search_term=series_id&search_value="{}"&rows_per_page={}'
+    r = requests.get(base_url.format(query, '10000'))
+    docs = json.loads(r.text)['response']['docs']
+    print('Search Results Found:')
+    for series in docs:
+        print {series['name']: series['series_id']}
+    save_search = raw_input('Would you like to save these search results? ')
+    if 'y' in save_search.lower():
+        searches[save_as] = docs
+        series_index = [{x['name'].split(', ')[1]: x['series_id']} for x in searches[save_as]]
+        df = pd.DataFrame(series_index)
+        df = pd.DataFrame(df.stack()).reset_index()
+        df = df.drop('level_0', axis=1)
+        df_i[save_as] = df.rename(columns={'level_1': 'State', 0: save_as})</code></pre>
 
-<!-- search_series() -->
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">df_i <span style="color: #666666">=</span> {}
+<pre><code>factors = [
+    ['SEDS.RETCB', 'Renewable Consumption'],
+    ['SEDS.REPRB', 'Renewable Production'],
+    ['SEDS.TEPRB', 'Total Energy Production'],
+    ['SEDS.ESRCD', 'Price of Residential Electricity'],
+]
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">search_series</span>(query, save_as):
-    base_url <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;http://api.eia.gov/search/?search_term=series_id&amp;search_value=&quot;{}&quot;&amp;rows_per_page={}&#39;</span>
-    r <span style="color: #666666">=</span> requests<span style="color: #666666">.</span>get(base_url<span style="color: #666666">.</span>format(query, <span style="color: #BA2121">&#39;10000&#39;</span>))
-    text <span style="color: #666666">=</span> r<span style="color: #666666">.</span>text
-    master_dict <span style="color: #666666">=</span> json<span style="color: #666666">.</span>loads(text)
-    m <span style="color: #666666">=</span> master_dict
-    data <span style="color: #666666">=</span> m[<span style="color: #BA2121">&#39;response&#39;</span>]
-    docs <span style="color: #666666">=</span> data[<span style="color: #BA2121">&#39;docs&#39;</span>]
-    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Search Results Found:&#39;</span>)
-    <span style="color: #008000; font-weight: bold">for</span> series <span style="color: #AA22FF; font-weight: bold">in</span> docs:
-        <span style="color: #008000; font-weight: bold">print</span> {series[<span style="color: #BA2121">&#39;name&#39;</span>]:series[<span style="color: #BA2121">&#39;series_id&#39;</span>]}
-    save_search <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Would you like to save these search results? &#39;</span>)
-    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&#39;y&#39;</span> <span style="color: #AA22FF; font-weight: bold">in</span> save_search<span style="color: #666666">.</span>lower():
-        searches[save_as] <span style="color: #666666">=</span> docs
-        series_index <span style="color: #666666">=</span> [{x[<span style="color: #BA2121">&#39;name&#39;</span>]<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;, &#39;</span>)[<span style="color: #666666">1</span>] : x[<span style="color: #BA2121">&#39;series_id&#39;</span>]} <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> searches[save_as]]
-        df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame(series_index)
-        df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame(df<span style="color: #666666">.</span>stack())
-        df <span style="color: #666666">=</span> df<span style="color: #666666">.</span>reset_index()
-        df <span style="color: #666666">=</span> df<span style="color: #666666">.</span>drop(<span style="color: #BA2121">&#39;level_0&#39;</span>, axis<span style="color: #666666">=1</span>)
-        df_i[save_as] <span style="color: #666666">=</span> df<span style="color: #666666">.</span>rename(columns<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;level_1&#39;</span>:<span style="color: #BA2121">&#39;State&#39;</span>,<span style="color: #666666">0</span>:save_as})
-    <span style="color: #008000; font-weight: bold">else</span>:
-        <span style="color: #008000; font-weight: bold">pass</span>
-</pre></div>
+for factor in factors:
+    search_series(factor[0], factor[1])</code></pre>
 
-<br>
+<pre><code># helper functions
 
-<!-- factors -->
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">factors <span style="color: #666666">=</span> [[<span style="color: #BA2121">&#39;SEDS.RETCB&#39;</span>, <span style="color: #BA2121">&#39;Renewable Consumption&#39;</span>],
-[<span style="color: #BA2121">&#39;SEDS.REPRB&#39;</span>, <span style="color: #BA2121">&#39;Renewable Production&#39;</span>],
-[<span style="color: #BA2121">&#39;SEDS.TEPRB&#39;</span>, <span style="color: #BA2121">&#39;Total Energy Production&#39;</span>],
-[<span style="color: #BA2121">&#39;SEDS.ESRCD&#39;</span>, <span style="color: #BA2121">&#39;Price of Residential Electricity&#39;</span>]]
-</pre></div>
+def query_url(url):
+    r = requests.get(url)
+    return json.loads(r.text)
 
-<br>
+def nav_json(j):
+    return j['series'][0]['data']</code></pre>
 
-<!-- compiling data -->
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> factor <span style="color: #AA22FF; font-weight: bold">in</span> factors:
-    query <span style="color: #666666">=</span> factor[<span style="color: #666666">0</span>]
-    save_as <span style="color: #666666">=</span> factor[<span style="color: #666666">1</span>]
-    search_series(query, save_as)
-</pre></div>
+<pre><code>def compile_state_data(series):
+    series_df = pd.DataFrame()
+    try:
+        for state_data in df_i[series][series]:
+            url = 'http://api.eia.gov/series/?series_id={}&api_key={}&out=json'.format(state_data, api_key)
+            data = nav_json(query_url(url))
+            df_inst = pd.DataFrame(data, columns=['Year', series])
+            df_inst['Year'] = [datetime.datetime.strptime(str(x), '%Y').year for x in df_inst['Year']]
+            df_inst['State'] = ''.join(df_i[series]['State'][df_i[series][series] == state_data])
+            df_inst = df_inst[['State', 'Year', series]]
+            series_df = df_inst if len(series_df) == 0 else series_df.append(df_inst, ignore_index=True)
+        return series_df
+    except Exception as e:
+        print('Error:', str(e), 'is not a recognized EIA Series ID.')</code></pre>
 
-<br>
+<pre><code>Total_Energy = compile_state_data('Total Energy Production')
+Renewable_Energy = compile_state_data('Renewable Production')
+Res_Electricity_Price = compile_state_data('Price of Residential Electricity')</code></pre>
 
-<!-- helper functions -->
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">#helper functions</span>
+<pre><code>keys = ['State', 'Year']
+df = pd.merge(Total_Energy, Renewable_Energy, on=keys).merge(Res_Electricity_Price, on=keys)
+df['Renewable, Percentage of Production'] = df['Renewable Production'] / df['Total Energy Production']</code></pre>
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">query_url</span>(url):
-    r <span style="color: #666666">=</span> requests<span style="color: #666666">.</span>get(url)
-    text <span style="color: #666666">=</span> r<span style="color: #666666">.</span>text
-    j <span style="color: #666666">=</span> json<span style="color: #666666">.</span>loads(text)
-    <span style="color: #008000; font-weight: bold">return</span> j
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">nav_json</span>(j):
-    data <span style="color: #666666">=</span> j[<span style="color: #BA2121">&#39;series&#39;</span>]
-    data <span style="color: #666666">=</span> data[<span style="color: #666666">0</span>]
-    data <span style="color: #666666">=</span> data[<span style="color: #BA2121">&#39;data&#39;</span>]
-    <span style="color: #008000; font-weight: bold">return</span> data
-</pre></div>
-
-<br>
-
-<!-- define compile_data() -->
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compile_state_data</span>(series):
-    series_df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame() <span style="color: #408080; font-style: italic">#df for each series</span>
-    <span style="color: #008000; font-weight: bold">try</span>:
-        <span style="color: #008000; font-weight: bold">for</span> state_data <span style="color: #AA22FF; font-weight: bold">in</span> [x <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> df_i[series][series]]:
-            url <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;http://api.eia.gov/series/?series_id={}&amp;api_key={}&amp;out=json&#39;</span><span style="color: #666666">.</span>format(state_data,api_key)
-            j <span style="color: #666666">=</span> query_url(url)
-            data <span style="color: #666666">=</span> nav_json(j)
-            df_inst <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame(data) <span style="color: #408080; font-style: italic">#contains year, series data</span>
-            df_inst<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;Year&#39;</span>, series]
-            df_inst[<span style="color: #BA2121">&#39;Year&#39;</span>] <span style="color: #666666">=</span> [datetime<span style="color: #666666">.</span>datetime<span style="color: #666666">.</span>strptime(<span style="color: #008000">str</span>(x), <span style="color: #BA2121">&#39;%Y&#39;</span>)<span style="color: #666666">.</span>year <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> df_inst[<span style="color: #BA2121">&#39;Year&#39;</span>]]
-            df_inst[<span style="color: #BA2121">&#39;State&#39;</span>] <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span><span style="color: #666666">.</span>join(df_i[series][<span style="color: #BA2121">&#39;State&#39;</span>][df_i[series][series] <span style="color: #666666">==</span> state_data])
-            df_inst <span style="color: #666666">=</span> df_inst[[<span style="color: #BA2121">&#39;State&#39;</span>, <span style="color: #BA2121">&#39;Year&#39;</span>, series]]
-            <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(series_df) <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
-                series_df <span style="color: #666666">=</span> df_inst
-            <span style="color: #008000; font-weight: bold">else</span>:
-                <span style="color: #408080; font-style: italic">#series_df = pd.merge(series_df, df_inst, on=[&#39;State&#39;,&#39;Year&#39;], how=&#39;inner&#39;)</span>
-                series_df <span style="color: #666666">=</span> series_df<span style="color: #666666">.</span>append(df_inst, ignore_index<span style="color: #666666">=</span><span style="color: #008000">True</span>)
-        <span style="color: #008000; font-weight: bold">return</span> series_df
-    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">Exception</span>, e:
-        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Error: &#39;</span>, <span style="color: #008000">str</span>(e), <span style="color: #BA2121">&#39;is not a recognized EIA Series ID.&#39;</span>
-</pre></div>
-
-<br>
-
-<!-- run compile_data() -->
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">Total_Energy <span style="color: #666666">=</span> compile_state_data(<span style="color: #BA2121">&#39;Total Energy Production&#39;</span>)
-Renewable_Energy <span style="color: #666666">=</span> compile_state_data(<span style="color: #BA2121">&#39;Renewable Production&#39;</span>)
-Res_Electricity_Price <span style="color: #666666">=</span> compile_state_data(<span style="color: #BA2121">&#39;Price of Residential Electricity&#39;</span>)
-</pre></div>
-
-<br>
-
-<!-- df creation -->
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">keys <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;State&#39;</span>, <span style="color: #BA2121">&#39;Year&#39;</span>]
-df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>merge(Total_Energy, Renewable_Energy, on<span style="color: #666666">=</span>keys)<span style="color: #666666">.</span>merge(Res_Electricity_Price, on<span style="color: #666666">=</span>keys)
-df[<span style="color: #BA2121">&#39;Renewable, Percentage of Production&#39;</span>] <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;Renewable Production&#39;</span>]<span style="color: #666666">/</span>df[<span style="color: #BA2121">&#39;Total Energy Production&#39;</span>]
-</pre></div>
-
-<br>
-
-<!-- pickling -->
-<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">outFile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;df.txt&#39;</span>, <span style="color: #BA2121">&#39;wb&#39;</span>)
-pickle<span style="color: #666666">.</span>dump(df, outFile)
-outFile<span style="color: #666666">.</span>close()
-</pre></div>
-
-<br>
+<pre><code>outFile = open('df.txt', 'wb')
+pickle.dump(df, outFile)
+outFile.close()</code></pre>
 
 <hr>
-<p class="left"><a href="/energy"> ← Back </a></p>  
+<p class="left"><a href="/energy">← Back</a></p>
 <p class="right"><a href="/energy/p3">Next →</a></p>
-
-      </section>
-      <footer>
-        
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-50124410-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-  </body>
-</html>
