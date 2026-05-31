@@ -1,142 +1,50 @@
 <!DOCTYPE html>
-<!-- homepage -->
 <head>
+  <title>c-trl | Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="http://christiantirol.com/" property="og:url">
 
-    <title>c-trl | Home</title>
-
-<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-50124410-3', 'auto');
-	ga('require', 'displayfeatures');
-	ga('send', 'pageview');
-</script>
-
-<meta charset="utf-8">
-<meta content="http://christiantirol.com/" property="og:url">
-
-<link rel="shortcut icon" href="http://bobdawg.org/images/ico/Link_Vista.ico">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/cs'>
-
-<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="/stylesheets/homestyles.css">
-
-
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/homestyles.css">
 </head>
-<!--
 
-
-
-
-
-The great divide.
-
-
-
-
-
-
-
--->
 <body>
 
-<!----- b e g i n :  h e a d e r ----->
-
 <div class="homeheader">
-
-<h1><a href="/about"><img src="http://i.imgur.com/9673XO4.png" class="home" id="about" height=120px width=120px></a>
-<p>christian.tirol</h1></p>
-<!---<h2><a href="/economics">economics</a> | <a href="/datascience">data science</a> | <a href="/analytics">analytics</a></h2>
----->
+  <a href="/about"><img src="http://i.imgur.com/9673XO4.png" class="home" id="about" width="96" height="96" alt="avatar"></a>
+  <h1>christian.tirol</h1>
 </div>
-<!----- b e g i n :  m a i n ---->
+
 <div class="container">
-<hr>
-	
-<div onclick="location.href='/zillow';" style="cursor: pointer;" class="main" id="zillow">
-	<p class="caption"><a class="main" title="Exploring ZRI" href="/zillow">Exploring the Zillow Rent Index and Rental Proprty Value Trends with Python</a></span><br><br></p>
+  <hr>
+
+  <div onclick="location.href='/zillow';" class="main" id="zillow">
+    <p class="caption"><a class="main" href="/zillow">Exploring the Zillow Rent Index and Rental Property Value Trends with Python</a></p>
+  </div>
+
+  <div onclick="location.href='/avatar';" class="main" id="avatar">
+    <p class="caption"><a class="main" href="/avatar">Sentiment Analysis Part 2: A Serious Discussion About a Nickelodeon Cartoon</a></p>
+  </div>
+
+  <div onclick="location.href='/xanga';" class="main" id="xanga">
+    <p class="caption"><a class="main" href="/xanga">Sentiment Analysis Part 1: Xanga Blog Entries from 2005</a></p>
+  </div>
+
+  <div onclick="location.href='/energy';" class="main" id="energy">
+    <p class="caption"><a class="main" href="/energy">Working with Energy Information Administration Data and API</a></p>
+  </div>
+
 </div>
 
-<div onclick="location.href='/avatar';" style="cursor: pointer;" class="main" id="avatar">
-	<p class="caption"><a class="main" title="Sentiment Analysis on Avatar" href="/avatar">Sentiment Analysis Part 2: A Serious Discussion About a Nickeloden Cartoon</a></span><br><br></p>
-</div>
-
-<div onclick="location.href='/xanga';" style="cursor: pointer;" class="main" id="xanga">
-	<p class="caption"><a class="main" title="Xanga Blog Entries and Natural Language Processing" href="/xanga">Sentiment Analysis Part 1: Xanga Blog Entries from 2005</a></span><br><br></p>
-</div>
-
-<div onclick="location.href='/energy';" style="cursor: pointer;"  class="main" id="energy">
-	<p class="caption"><a class="main" title="Working with the EIA API" href="/energy">Working with Energy Information Administration Data and API</a></span><br><br></p>
-</div>
-
-
-<!-- JUST A NOTEBOOK
-<div onclick="location.href='/evilmorty';" style="cursor: pointer;"  class="main" id="transcriptscraping">
-	<p class="caption"><a class="main" title="Transcript Scraping 1: Absurdism in Cartoons" href="/evilmorty">Transcript Scraping 1: Absurdism in Cartoons and Sentiment Analysis</a></span><br><br></p>
-</div>
--->
-
-<!-- NOT READY
-<div onclick="location.href='/headlines';" style="cursor: pointer;"  class="main" id="headlines">
-	<p class="caption"><a class="main" title="Predicting Economic Indicators with Headline Sentiment" href="/headlines">Sentiment Analysis Part 4: Predicting Economic Indicators with News Headlines</a></span><br><br></p>
-</div>
--->
-
-<!-- NOT DONE
-<div onclick="location.href='/pacquiao'"; style="cursor: pointer;"  class="main" id="pacquiao">
-	<p class="caption"><a class="main" title="Live-streaming Twitter" href="/pacquiao">Live-streaming Twitter and Tracking Hashtag Frequency</a></span><br><br></p>
-</div>
--->
-
-<!-- NOT READY
-<div onclick="location.href='/insta';" style="cursor: pointer;" class="main" id="insta">
-	<p class="caption"><a class="main" title="Working with the Instagram API" href="/insta">Sentiment Analysis Part 3: Exploring Instagram Hashtags and Comments</a></span><br><br></p>
-</div>
--->
-
-
-<!-- NOT READY
-<div onclick="location.href='/fred';" style="cursor: pointer;"  class="main" id="fred">
-	<p class="caption"><a class="main" title="Working with the FRED API" href="/fred">Working with Federal Reserve Economic Data</a></span><br><br></p>
-</div>
--->
-<!--  UNFINISHED
-<div onclick="location.href='/colorcode';" style="cursor: pointer;"  class="main-pending" id="colorcode">
-	<p class="caption">Corporate Logo Pixel-Percentage Analysis</span><br><br></p>
-</div>
----<
-<!--  UNFINISHED
-<div onclick="location.href='/electricity';" style="cursor: pointer;" class="main-pending" id="electricity">
-	<p class="caption"><a title="" href="/electricity">Renewable Energy, Deregulation, and Residential Electricity Prices</a></span><br><br></p>
-</div>
---->
-<!--  UNFINISHED
-<div onclick="location.href='/gasoline';" style="cursor: pointer;" class="main-pending" id="gasoline">
-	<p class="caption"><a title="" href="/theleaf">Effects of US Gas Prices on Consumer Behavior</a></span><br><br></p>
-</div>
---->
-<!--  UNFINISHED
-<div onclick="location.href='/nbaprimetime';" style="cursor: pointer;" class="main-pending" id="nbaprimetime">
-	<p class="caption"><a title="" href="/theleaf">Finding the 'Prime' of the Average NBA Player</a></span><br><br></p>
-</div>
---->
-</div>
-<!----- b e g i n :  f o o t e r ----->
-
-<div class="push"></div>
-
-		</div>
-
-		<center>
 <div class="feet">
-<hr>
-<a href="https://github.com/c-trl" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="feet" id="ghicon" height="100" width="100"></a>
-<a href="mailto:tirol.christian+ctrl@gmail.com" target="_blank"><img src="https://image.flaticon.com/icons/svg/281/281769.svg" class="feet" id="gmicon" height="85" width="85"></a>
-<a href="http://www.linkedin.com/in/christiantirol" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145807.svg" class="feet" id="liicon" height="75" width="75"></a>
-</center>
+  <hr>
+  <a href="https://github.com/c-trl" target="_blank" class="feet-link">🐙</a>
+  <a href="mailto:tirol.christian+ctrl@gmail.com" target="_blank" class="feet-link">✉️</a>
+  <a href="http://www.linkedin.com/in/christiantirol" target="_blank" class="feet-link">💼</a>
 </div>
-</body>  
+
+</body>
 </html>
