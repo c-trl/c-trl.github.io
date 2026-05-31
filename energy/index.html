@@ -1,34 +1,28 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>c-trl | Working with the EIA API</title>
-    <link rel="stylesheet" href="/stylesheets/article.css">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <a href="/home"><img src="http://i.imgur.com/9673XO4.png" class="home" width="52" height="52" alt="home"></a>
-        <h2>Working with the EIA.gov API</h2>
-        <p><a href="/energy">Section I: Introduction, Configuration and Setup</a></p>
-        <p><a href="/energy/p2">Section II: Aggregating EIA Data with Python</a></p>
-        <p><a href="/energy/p3">Section III: Cleaning, Visualization with Pandas, Matplotlib</a></p>
-        <p><a href="/energy/p4">Section IV: Understanding SVG Files with BeautifulSoup</a></p>
-        <p><a href="/energy/p5">Section V: Geoplotting State-Level US Data to Create Heatmaps</a></p>
-      </header>
+---
+layout: article
+title: "Working with the EIA API"
+series: "Working with the EIA.gov API"
+sections:
+  - label: "Section I: Introduction, Configuration and Setup"
+    url: "/energy"
+  - label: "Section II: Aggregating EIA Data with Python"
+    url: "/energy/p2"
+  - label: "Section III: Cleaning, Visualization with Pandas, Matplotlib"
+    url: "/energy/p3"
+  - label: "Section IV: Understanding SVG Files with BeautifulSoup"
+    url: "/energy/p4"
+  - label: "Section V: Geoplotting State-Level US Data to Create Heatmaps"
+    url: "/energy/p5"
+---
+<p class="date">January 24, 2015</p>
 
-      <section>
+<h2>Introduction to the EIA Website and API</h2>
 
-        <p class="date">January 24, 2015</p>
+<p class="content">Energy economics has always been an interest of mine, and I love keeping up to date on current developments in technology, as well as understanding historical trends in the economics of energy infrastructure, development, and commerce. This project looks into historical trends in the energy industry, and involves a bit of data mining to learn more about energy. In particular, this project looks at the production fuel sources, the generation of energy, and the consumption of energy.</p>
 
-        <h2>Introduction to the EIA Website and API</h2>
+<p class="content">The <a href="http://www.eia.gov">US Energy Information Administration's website</a> is an excellent resource for anything energy data-related. The site hosts a wide range of data covering virtually every aspect of the energy industry, and serves as a federal hub for public energy data. This project uses Python (2.7) and Requests to remotely tap into the EIA's data via its API. Once data is compiled, Pandas, Json, and Datetime are used to reorganize the data into a manageable data frame. Using EIA's state-level data, heatmaps can be created with the help of a blank map of the United States in SVG format, along with the BeautifulSoup library.</p>
 
-        <p class="content">Energy economics has always been an interest of mine, and I love keeping up to date on current developments in technology, as well as understanding historical trends in the economics of energy infrastructure, development, and commerce. This project looks into historical trends in the energy industry, and involves a bit of data mining to learn more about energy. In particular, this project looks at the production fuel sources, the generation of energy, and the consumption of energy.</p>
-
-        <p class="content">The <a href="http://www.eia.gov">US Energy Information Administration's website</a> is an excellent resource for anything energy data-related. The site hosts a wide range of data covering virtually every aspect of the energy industry, and serves as a federal hub for public energy data. This project uses Python (2.7) and Requests to remotely tap into the EIA's data via its API. Once data is compiled, Pandas, Json, and Datetime are used to reorganize the data into a manageable data frame. Using EIA's state-level data, heatmaps can be created with the help of a blank map of the United States in SVG format, along with the BeautifulSoup library.</p>
-
-        <p class="content">My imports in Python for this project were as follows:</p>
+<p class="content">My imports in Python for this project were as follows:</p>
 
 <pre><code>import pandas as pd
 from pandas.io.json import json_normalize
@@ -38,23 +32,17 @@ from bs4 import BeautifulSoup as bs
 import datetime
 import pickle</code></pre>
 
-        <p class="content">Some things that might be helpful for fellow beginners in Python that are covered in this project include:</p>
+<p class="content">Some things that might be helpful for fellow beginners in Python that are covered in this project include:</p>
 
-        <ul>
-          <li>How to pull in website data with Requests</li>
-          <li>Making use of helper functions</li>
-          <li>How to manipulate data frames with Pandas</li>
-          <li>What json_normalize does</li>
-          <li>How to create a heatmap using an SVG file</li>
-        </ul>
+<ul>
+  <li>How to pull in website data with Requests</li>
+  <li>Making use of helper functions</li>
+  <li>How to manipulate data frames with Pandas</li>
+  <li>What json_normalize does</li>
+  <li>How to create a heatmap using an SVG file</li>
+</ul>
 
-        <p class="content">Before getting started in Python, it's probably better to get registering for an EIA API key out of the way. The process is quite simple and can be done <a href="http://www.eia.gov/beta/api/register.cfm">here</a>. Once an API key is acquired, the next step is to start exploring what data the EIA site has to offer.</p>
+<p class="content">Before getting started in Python, it's probably better to get registering for an EIA API key out of the way. The process is quite simple and can be done <a href="http://www.eia.gov/beta/api/register.cfm">here</a>. Once an API key is acquired, the next step is to start exploring what data the EIA site has to offer.</p>
 
-        <hr>
-        <p class="right"><a href="/energy/p2">Next →</a></p>
-
-      </section>
-      <footer></footer>
-    </div>
-  </body>
-</html>
+<hr>
+<p class="right"><a href="/energy/p2">Next →</a></p>

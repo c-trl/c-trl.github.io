@@ -1,65 +1,27 @@
-<!doctype html>
-<!-- EIA.gov API -->
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>c-trl | Data Wrangling with Python</title>
-    
-    <link rel="stylesheet" href="/stylesheets/styles.css">
-    <link rel="stylesheet" href="/stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    <link rel="shortcut icon" href="http://bobdawg.org/images/ico/Link_Vista.ico">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-      
-      
-        <center><h1><a href="/home"><img src="http://i.imgur.com/9673XO4.png" class="home" height=120px width=120px></a></h1></center>
-        <hr>
-        <h3><a id="eia" class="anchor" href="#eia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working with the EIA.gov API</h3>
-        <p><a href="/energy">Section I: Introduction, Configuration and Setup</a></p>
-        <p><a href="/energy/p2">Section II: Aggregating EIA Data with Python</a></p>
-        <p><a href="/energy/p3">Section III: Cleaning, Visualization with Pandas, Matplotlib</a></p>
-        <p><a href="/energy/p4">Section IV: Understanding SVG Files with BeautifulSoup</a></p>
-        <p><a href="/energy/p5">Section V: Geoplotting State-Level US Data to Create Heatmaps</a></p>
+---
+layout: article
+title: "Working with the EIA API"
+series: "Working with the EIA.gov API"
+sections:
+  - label: "Section I: Introduction, Configuration and Setup"
+    url: "/energy"
+  - label: "Section II: Aggregating EIA Data with Python"
+    url: "/energy/p2"
+  - label: "Section III: Cleaning, Visualization with Pandas, Matplotlib"
+    url: "/energy/p3"
+  - label: "Section IV: Understanding SVG Files with BeautifulSoup"
+    url: "/energy/p4"
+  - label: "Section V: Geoplotting State-Level US Data to Create Heatmaps"
+    url: "/energy/p5"
+---
+<h2>Creating Simple Heatmaps</h2>
 
-      </header>
-      <section>
-        <h3>
-<a id="eia" class="anchor" href="#eia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating simple heatmaps</h3>
+<p class="content">The U.S. Energy Information Administration has a <a href="http://www.eia.gov/">great website</a> and is a go-to resource for anything energy data-related. The site provides a great GUI tool to explore various datasets, however to really dig into historical data, it's easier to bring data in from the back. Luckily, EIA has developed an API to allow for easy access to historical data with Python.</p>
 
-<p>The U.S. Energy Information Administration has a <a class="reference" href="http://http://www.eia.gov/">great website</a> and is a go-to resource for anything energy data-related.  The site has gone through a number of design changes, and provides a great GUI tool to explore various datasets, however to really dig into historical data, it's easier to bring data in from the back.  Luckily, EIA has developed an API to allow for easy access to historical data with Python.  </p>
+<h3>Creating a GIF with Adobe Photoshop / Illustrator</h3>
 
-<h3>
-<a class="blog-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a GIF with Adobe Photoshop/Illustrator</h3>
-
-<img src="http://i.imgur.com/NcZqnGl.gif" class="body" id="energyheatmap">
-
-<p>Timelapse heatmap of renenwable energy by state; darker green indicates higher percentange in energy portfolios.</p>
+<p class="content-image"><img src="http://i.imgur.com/NcZqnGl.gif" class="content" alt="Renewable energy heatmap timelapse"></p>
+<p class="blogcaption">Timelapse heatmap of renewable energy by state. Darker green indicates a higher percentage in energy portfolios.</p>
 
 <hr>
-<p class="left"><a href="/energy/p4"> ← Back </a></p>  
-      </section>
-      <footer>
-        
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-50124410-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-  </body>
-</html>
+<p class="left"><a href="/energy/p4">← Back</a></p>

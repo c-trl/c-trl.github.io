@@ -1,62 +1,44 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>c-trl | Sentiment Analysis: Avatar</title>
-    <link rel="stylesheet" href="/stylesheets/article.css">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <a href="/home"><img src="http://i.imgur.com/9673XO4.png" class="home" width="52" height="52" alt="home"></a>
-        <h2>Sentiment Analysis and Ratings</h2>
-        <p><a href="/avatar">A Serious Discussion About a Nickelodeon Cartoon</a></p>
-      </header>
+---
+layout: article
+title: "Sentiment Analysis: Avatar"
+series: "Sentiment Analysis and Ratings"
+sections:
+  - label: "A Serious Discussion About a Nickelodeon Cartoon"
+    url: "/avatar"
+---
+<p class="date">March 27, 2015</p>
 
-      <section>
+<h2>Okay, hear me out.</h2>
 
-        <p class="date">March 27, 2015</p>
+<p class="content">In "The Desert", we follow a group of protagonists as they desperately struggle to find their way out of the middle of a desert (surprise, surprise). Throughout the episode, we watch as each character declines into their own respective anti-selves. Chaos. Hopelessness. Id. The focus of the episode — what happens when each character is put out of their element?</p>
 
-        <h2>Okay, hear me out.</h2>
+<p class="content">How well-written was this show? If you're familiar with the show, the following was my response to a forum post titled "Which episode was your favorite?" where I dissect the plot of the episode character-by-character. Feel free to skip right past the nerd sesh if you're not.</p>
 
-        <p class="content">In "The Desert", we follow a group of protagonists as they desperately struggle to find their way out of the middle of a desert (surprise, surprise). Throughout the episode, we watch as each character declines into their own respective anti-selves. Chaos. Hopelessness. Id. The focus of the episode — what happens when each character is put out of their element?</p>
+<blockquote>
+  <p>One of them is definitely Book 2's The Desert.</p>
+  <p>We see all of the characters out of their element — both metaphorically and literally. Sokka is typically the rational one, and as the eldest, he is typically looked to for direction. In The Desert, he's tripping balls, effectively ineffective. Instead of the one coming up with solutions, he's become a burden.</p>
+  <p>Katara now has to play the leader. You can see that she's more concerned about keeping everyone together than getting out of the desert, probably because her nature is more about community than mission — but the only way to keep everyone together is by getting out of the desert. That scene when she looks down at everyone and essentially says "that's it" is where you see her change momentarily in character, taking on Sokka's role.</p>
+  <p>Toph can't bend. She can't see. Surrounded by nothing but sand, she is also useless. Not to mention the silent guilt she must feel after choosing to save the gaang over Appa, which has brought on some unnatural rage from Aang.</p>
+  <p>Aang is usually the mediator and peacemaker. You really see an incredible contradiction to his nature in this episode. Instead of keeping an open-mind, he's focused only on Appa. Aang's rage crescendos through the episode until the very last moment when the Avatar state takes over him. The rage shows and all the disappointment in him from the episode totally washes away and you can't help but feel for him.</p>
+  <p>Out of all the episodes, this one was the only that has me fighting back tears every time I watch it.</p>
+</blockquote>
 
-        <p class="content">How well-written was this show? If you're familiar with the show, the following was my response to a forum post titled "Which episode was your favorite?" where I dissect the plot of the episode character-by-character. If you're familiar with the show, enjoy the fandom. Otherwise, feel free to skip right past the nerd sesh.</p>
+<p class="content">Anyway, awhile back I did a little digging into what viewership ratings were like for this show. I posted my findings and initiated a forum discussion on Reddit <a href="http://www.reddit.com/r/TheLastAirbender/comments/1qrgqx/lets_talk_about_viewership_and_ratings/">here</a>. Recently, I decided to carry over a project on sentiment analysis, and compound on what I had already dug up on the show.</p>
 
-        <blockquote>
-          <p>One of them is definitely Book 2's The Desert.</p>
-          <p>We see all of the characters out of their element — both metaphorically and literally. Sokka is typically the rational one, and as the eldest, he is typically looked to for direction. They joke about him being the 'leader' in a previous episode, but really he is their go-to guy. In The Desert, he's tripping balls, effectively ineffective. Instead of the one coming up with solutions, he's become a burden.</p>
-          <p>Katara now has to play the leader. You can see that she's more concerned about keeping everyone together than getting out of the desert, probably because her nature is more about community than mission — but the only way to keep everyone together is by getting out of the desert. That scene when she looks down at everyone and essentially says "that's it" is where you see her change momentarily in character, taking on Sokka's role.</p>
-          <p>Toph can't bend. She can't see. Surrounded by nothing but sand, she is also useless. Not to mention the silent guilt she must feel after choosing to save the gaang over Appa, which has brought on some unnatural rage from Aang.</p>
-          <p>Aang is usually the mediator and peacemaker. You really see an incredible contradiction to his nature in this episode. You can't help but hate how his rage gets in the way of keeping everything together. Instead of keeping an open-mind, he's focused only on Appa. Not only that, but focus on anything other than Appa sets him off. Aang's rage crescendos through the episode until the very last moment when the Avatar state takes over him. The rage shows and all the disappointment in him from the episode totally washes away and you can't help but feel for him.</p>
-          <p>Out of all the episodes, this one was the only that has me fighting back tears every time I watch it.</p>
-        </blockquote>
+<p class="content">What I expected to find was simple: negative sentiment for the really good episodes, and neutral sentiment for the filler episodes. Positive sentiment I did not anticipate so much — the nature of the show was quite deep and incorporated a lot of cultural inspirations, giving it quite the dynamic.</p>
 
-        <p class="content">Anyway, awhile back I did a little digging into what viewership ratings were like for this show. I posted my findings and initiated a forum discussion on Reddit <a href="http://www.reddit.com/r/TheLastAirbender/comments/1qrgqx/lets_talk_about_viewership_and_ratings/">here</a>. Recently, I decided to carry over a project on sentiment analysis, and compound on what I had already dug up on the show.</p>
+<p class="content">To do this, I searched for the show's transcripts. Luckily, the fanbase for the show is immense, and they weren't hard to find. I fed them into the program I'd already created for a previous iteration of text and sentiment exploration quite easily — however I was surprised by what I found.</p>
 
-        <p class="content">What I expected to find was simple: negative sentiment for the really good episodes, and neutral sentiment for the filler episodes. Positive sentiment I did not anticipate so much as the nature of the show was quite deep and incorporated a lot of cultural inspirations, giving the show quite the dynamic. If there would be any positive episodes, it would be the fillers.</p>
+<h3>Overall, the average sentiment of the show was negative.</h3>
 
-        <p class="content">To do this, I searched for the show's transcripts. Luckily, the fanbase for the show is immense, and they weren't hard to find. I fed them into the program I'd already created for a previous iteration of text and sentiment exploration quite easily, however I was surprised by what I found.</p>
+<p class="content">This was not so surprising — good stories need conflict, and conflict is negative. What I was surprised to find was that every single episode — all but ONE — were valuated as negative in sentiment. I had already run the program on a number of different texts in projects before this one, and the estimator seemed to work just fine. Even then, I was worried there was something wrong with my code.</p>
 
-        <h3>Overall, the average sentiment of the show was negative.</h3>
+<p class="content">What about the one positive episode? It occurred to me that the episode valuated as positive happened to be a flashback episode — and then I suddenly realized the reason for the consistently negative trend in sentiment.</p>
 
-        <p class="content">This was not so surprising — good stories need conflict, and conflict is negative. What I was surprised to find was that every single episode — all but ONE — were valuated as negative in sentiment. All but ONE. I had already run the program on a number of different texts in projects before this one — blog entries, tweets, Amazon product reviews — and the estimator seemed to work just fine. Even then, I was worried there was something wrong with my code.</p>
+<p class="content">It just so happens that the entirety of Avatar: The Last Airbender takes place during a time of war. Even filler episodes with close to neutral sentiment take place during wartime, so the sentiment of conflict never really escapes the story. Common words with negative sentiment prove this theory: frequently occurring words include 'smoke', 'tanks', 'attack', 'fire', and 'struggle'. To establish this kind of consistent atmosphere in a show on Nickelodeon was impressive to say the least.</p>
 
-        <p class="content">I sat back, concerned. What about the one positive episode? It occurred to me that the episode valuated as positive happened to be a flashback episode, and then I suddenly realized the reason for the consistently negative trend in sentiment.</p>
+<h3>I delved deeper into why the "flashback" episode was the most positive.</h3>
 
-        <p class="content">If you're a fan of the show, I'll give you a moment to guess for yourself.</p>
+<p class="content">It turns out that it was in this episode (Book 3, Episode 6) where two of the main protagonists gain significant insight into their pasts. One gains clarity into the nature of his role as a political figure, and another learns of his lineage and his relation to that figure. To add to the positive sentiment, the flashback includes a scene where the main character is born — the episode that gave precedence to one of the show's fanbase's favorite themes.</p>
 
-        <p class="content">It just so happens that the entirety of Avatar: The Last Airbender (albeit the one episode) takes place during a time of war. Even filler episodes with close to neutral sentiment take place during wartime, so the sentiment of conflict never really escapes the story. The writers and producers of the show did well to preserve this concept. Common words with negative sentiment prove this theory. Frequently occurring words include 'smoke', 'tanks', 'attack', 'fire', and 'struggle'. To establish this kind of consistent atmosphere in a show on Nickelodeon was impressive to say the least.</p>
-
-        <h3>I delved deeper into why the "flashback" episode was the most positive.</h3>
-
-        <p class="content">It turns out that it was in this episode in particular (Book 3, Episode 6) where two of the main protagonists gain significant insight into their pasts. One gains clarity into the nature of his role as a political figure, and that political figure's relationship with other nation's leaders. Another learns of his lineage and his relation to the first political figure. To add to the positive sentiment in the episode, the flashback includes a scene where the main character is born. This was also the episode that gave precedence to one of the show's fanbase's favorite themes.</p>
-
-        <h3><a href="http://nbviewer.ipython.org/github/c-trl/atla-and-nlp/blob/master/alta-and-nlp.ipynb" target="_blank">Follow this project's progress in the IPython notebook →</a></h3>
-
-      </section>
-      <footer></footer>
-    </div>
-  </body>
-</html>
+<h3><a href="http://nbviewer.ipython.org/github/c-trl/atla-and-nlp/blob/master/alta-and-nlp.ipynb" target="_blank">Follow this project's progress in the IPython notebook →</a></h3>

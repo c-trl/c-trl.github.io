@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>c-trl | {{ page.title }}</title>
+    <link rel="stylesheet" href="/stylesheets/article.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/home"><img src="{{ site.avatar }}" class="home" width="52" height="52" alt="home"></a>
+        {% if page.series %}<h2>{{ page.series }}</h2>{% endif %}
+        {% for section in page.sections %}
+          <p><a href="{{ section.url }}">{{ section.label }}</a></p>
+        {% endfor %}
+      </header>
+      <section>
+        {{ content }}
+      </section>
+      <footer></footer>
+    </div>
+  </body>
+</html>
